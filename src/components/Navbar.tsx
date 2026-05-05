@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const NAV_LINKS = [
+   { label: 'Home', href: '#home' },
   { label: 'Services', href: '#services' },
   { label: 'Work',     href: '#work' },
   { label: 'Pricing',  href: '#pricing' },
@@ -46,10 +47,12 @@ export default function Navbar() {
       />
 
       {/* Nav content */}
+      
       <div className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
-      
-<Image src="/image/asakidigital.png" alt="AiSaki Digital" height={36} width={160} className="object-contain" id="home" />
+        <a href="#home">
+          <Image src="/image/asakidigital.png" alt="AiSaki Digital" height={36} width={160} className="object-contain" />
+        </a>
 
     
     
@@ -85,6 +88,7 @@ export default function Navbar() {
           </svg>
         </button>
       </div>
+
 
       {/* Mobile menu */}
       {menuOpen && (
