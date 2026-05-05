@@ -56,7 +56,7 @@ export default function TypewriterText() {
                 style={{
                   display: 'inline-block',
                   animation: `letter-drop 0.7s cubic-bezier(0.22,1,0.36,1) ${0.08 + wi * 0.15 + li * 0.05}s both`,
-                  background: 'linear-gradient(160deg, #080808 0%, #1a1a1a 45%, #383838 100%)',
+                  background: 'linear-gradient(90deg, rgba(9,10,10,1) 0%, rgba(17,102,53,1) 100%, rgba(237,221,83,1) 100%)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',

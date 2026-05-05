@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: 'Services', href: '#services' },
   { label: 'Work',     href: '#work' },
   { label: 'Pricing',  href: '#pricing' },
-  { label: 'Contact',  href: '#contact' },
+
 ];
 
 export default function Navbar() {
@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <nav className="fixed left-0 right-0 top-0 z-40 "
     style={{
-      background: 'linear-gradient(90deg, rgba(9,10,10,1) 0%, rgba(17,102,53,1) 100%)',
+      background: 'linear-gradient(90deg, rgba(9,10,10,1) 0%, rgba(17,102,53,1) 100%, rgba(237,221,83,1) 100%)',
     }}
    
         >
@@ -32,7 +32,7 @@ export default function Navbar() {
       <div
         className="pointer-events-none absolute inset-0 transition-all duration-500"
         style={{
-      background: 'linear-gradient(90deg, rgba(9,10,10,1) 0%, rgba(17,102,53,1) 100%)',
+      background: 'linear-gradient(90deg, rgba(9,10,10,1) 0%, rgba(17,102,53,1) 100%, rgba(237,221,83,1) 100%)',
     }}
       />
 
@@ -65,9 +65,7 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          {/* <a href="#contact" className="btn-black rounded-full px-6 py-3 text-sm">
-            Get Started
-          </a> */}
+         
         </div>
 
         {/* Mobile toggle */}
@@ -113,13 +111,13 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          {/* <a
+          <a
             href="#contact"
             className="btn-green mt-3 rounded-full px-5 py-3.5 text-center text-xs"
             onClick={() => setMenuOpen(false)}
           >
-            Get Started
-          </a> */}
+            Get Support
+          </a>
         </div>
       )}
     </nav>

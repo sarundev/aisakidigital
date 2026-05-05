@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import SupporterPopup from './SupporterPopup';
 
 const LINKS = {
   Services: ['Web Design', 'Brand Identity', 'Digital Marketing', 'Mobile Apps', 'SEO & Growth'],
@@ -109,6 +110,7 @@ function AnimatedLink({ label }: { label: string }) {
 export default function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [showSupporterPopup, setShowSupporterPopup] = useState(false);
 
   useEffect(() => {
     const el = footerRef.current;
@@ -208,6 +210,9 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+
+            {/* Support Us Button */}
+           
           </div>
 
           {/* Link columns */}
@@ -273,6 +278,9 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Supporter Popup */}
+      {showSupporterPopup && <SupporterPopup onClose={() => setShowSupporterPopup(false)} />}
     </footer>
   );
 }
