@@ -64,8 +64,8 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
       {/* Center content */}
       <div className="relative flex flex-col items-center gap-6 px-8 text-center">
         {/* Logo wordmark */}
-       {/* <h1
-  className="logo-text select-none"
+       <h1
+  className="logo-text select-none text-nowrap "
   style={{
     fontSize: 'clamp(2.5rem, 8vw, 5rem)',
     fontWeight: 900,
@@ -85,8 +85,8 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   }}
 >
   AISAKi DiGiTAL
-</h1> */}
-<img src="/image/loading.png" width={700} height={400} alt="" />
+</h1>
+<img src="/image/loading.png" width={300} height={300} alt="" />
 
         {/* Tagline */}
         <p
