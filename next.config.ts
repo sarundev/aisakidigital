@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         port: '8000',
         pathname: '/storage/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'admin-digital-vrylxdxz.on-forge.com',
+        pathname: '/storage/**',
+      },
     ],
   },
 };

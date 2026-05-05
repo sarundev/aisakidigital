@@ -50,7 +50,7 @@ export default function Navbar() {
       
 <Image src="/image/asakidigital.png" alt="AiSaki Digital" height={36} width={160} className="object-contain" id="home" />
 
-    \
+    
     
         
 
