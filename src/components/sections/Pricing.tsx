@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import { fetchPricing, type ApiPricingPlan } from '@/lib/api';
 
+const TELEGRAM_URL = 'https://t.me/@T1_fakerrr';
+const FACEBOOK_URL = 'https://www.facebook.com/AisakiDigital';
+
 function CheckIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#39FF14" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
@@ -18,6 +21,96 @@ function SendIcon() {
       <line x1="22" y1="2" x2="11" y2="13" />
       <polygon points="22 2 15 22 11 13 2 9 22 2" />
     </svg>
+  );
+}
+
+function ContactPopup({ plan, onClose }: { plan: ApiPricingPlan; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(6px)' }}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-sm rounded-2xl p-8"
+        style={{
+          background: 'rgba(6,20,8,0.98)',
+          border: '1.5px solid rgba(57,255,20,0.35)',
+          boxShadow: '0 0 60px rgba(57,255,20,0.12), 0 24px 60px rgba(0,0,0,0.6)',
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full transition-colors"
+          style={{ color: '#666', background: 'rgba(255,255,255,0.05)' }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#666')}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+
+        <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: '#39FF14' }}>Contact buy</p>
+        <h3 className="mb-2 text-xl font-bold" style={{ color: '#ffffff' }}>{plan.name}</h3>
+        <p className="mb-7 text-sm" style={{ color: '#7a9a7a' }}>
+          Contact us on your preferred platform and we&apos;ll get back to you right away.
+        </p>
+
+        <div className="flex flex-col gap-3">
+          <a
+            href={TELEGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 rounded-xl px-5 py-4 font-semibold transition-all duration-200"
+            style={{ background: 'rgba(36,161,222,0.12)', border: '1px solid rgba(36,161,222,0.3)', color: '#ffffff' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(36,161,222,0.22)'; e.currentTarget.style.borderColor = 'rgba(36,161,222,0.6)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(36,161,222,0.12)'; e.currentTarget.style.borderColor = 'rgba(36,161,222,0.3)'; }}
+          >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="12" fill="#24A1DE" />
+              <path d="M17.5 6.5l-2.1 10.2c-.15.7-.56.87-1.13.54l-3.13-2.3-1.51 1.45c-.17.17-.31.31-.63.31l.22-3.17 5.74-5.19c.25-.22-.05-.34-.39-.12L6.1 13.5 3.1 12.57c-.67-.21-.68-.67.14-.99l13.25-5.11c.56-.2 1.05.14.87.99l-.96-.96z" fill="white"/>
+            </svg>
+            <div>
+              <div className="text-sm font-bold">Telegram</div>
+              <div className="text-xs" style={{ color: '#7ab8d4' }}>Message us on Telegram</div>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-auto opacity-50">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+
+          <a
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 rounded-xl px-5 py-4 font-semibold transition-all duration-200"
+            style={{ background: 'rgba(24,119,242,0.12)', border: '1px solid rgba(24,119,242,0.3)', color: '#ffffff' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(24,119,242,0.22)'; e.currentTarget.style.borderColor = 'rgba(24,119,242,0.6)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(24,119,242,0.12)'; e.currentTarget.style.borderColor = 'rgba(24,119,242,0.3)'; }}
+          >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="12" fill="#1877F2" />
+              <path d="M15.5 8H13.5C13.2 8 13 8.2 13 8.5V10H15.5L15.2 12.5H13V19H10.5V12.5H9V10H10.5V8.5C10.5 6.6 11.6 5.5 13.5 5.5H15.5V8Z" fill="white"/>
+            </svg>
+            <div>
+              <div className="text-sm font-bold">Facebook</div>
+              <div className="text-xs" style={{ color: '#7aa4d4' }}>Message us on Facebook</div>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-auto opacity-50">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -45,6 +138,7 @@ function SkeletonCard({ tall }: { tall?: boolean }) {
 export default function Pricing() {
   const [plans, setPlans] = useState<ApiPricingPlan[]>([]);
   const [loading, setLoading] = useState(true);
+  const [popupPlan, setPopupPlan] = useState<ApiPricingPlan | null>(null);
 
   useEffect(() => {
     fetchPricing()
@@ -154,6 +248,7 @@ export default function Pricing() {
                         ? { background: '#39FF14', color: '#000', fontSize: '0.9rem', letterSpacing: '0.04em', boxShadow: '0 0 20px rgba(57,255,20,0.35)' }
                         : { background: 'rgba(255,255,255,0.05)', color: '#c8e8c8', border: '1px solid rgba(57,255,20,0.15)', fontSize: '0.9rem', letterSpacing: '0.04em' }
                     }
+                    onClick={() => setPopupPlan(plan)}
                     onMouseEnter={(e) => {
                       if (!plan.is_popular) {
                         e.currentTarget.style.background = 'rgba(57,255,20,0.08)';
@@ -174,6 +269,8 @@ export default function Pricing() {
               ))}
         </div>
       </div>
+
+      {popupPlan && <ContactPopup plan={popupPlan} onClose={() => setPopupPlan(null)} />}
     </section>
   );
 }

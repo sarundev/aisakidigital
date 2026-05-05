@@ -21,17 +21,18 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-40">
+    <nav className="fixed left-0 right-0 top-0 z-40 "
+    style={{
+      background: 'linear-gradient(90deg, rgba(9,10,10,1) 0%, rgba(17,102,53,1) 100%)',
+    }}
+   
+        >
       {/* Glass background — fades in on scroll */}
       <div
         className="pointer-events-none absolute inset-0 transition-all duration-500"
-        style={scrolled ? {
-          background: 'rgba(255,255,255,0.82)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          borderBottom: '1px solid rgba(0,0,0,0.06)',
-          boxShadow: '0 2px 20px rgba(0,0,0,0.06)',
-        } : { background: 'transparent' }}
+        style={{
+      background: 'linear-gradient(90deg, rgba(9,10,10,1) 0%, rgba(17,102,53,1) 100%)',
+    }}
       />
 
       {/* Top green accent line */}
@@ -57,13 +58,13 @@ export default function Navbar() {
         {/* Desktop links */}
         <div className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="nav-link text-base">
+            <a key={link.href} href={link.href} className="nav-link ">
               {link.label}
             </a>
           ))}
-          <a href="#contact" className="btn-black rounded-full px-6 py-3 text-sm">
+          {/* <a href="#contact" className="btn-black rounded-full px-6 py-3 text-sm">
             Get Started
-          </a>
+          </a> */}
         </div>
 
         {/* Mobile toggle */}
@@ -71,9 +72,9 @@ export default function Navbar() {
           className="md:hidden"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
-          style={{ color: '#505050', transition: 'color 0.2s ease' }}
+          style={{ color: '#aaaaaa', transition: 'color 0.2s ease' }}
           onMouseEnter={(e) => (e.currentTarget.style.color = '#39FF14')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = '#505050')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#aaaaaa')}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             {menuOpen ? (
@@ -90,11 +91,11 @@ export default function Navbar() {
         <div
           className="relative z-10 flex flex-col gap-1 px-6 pb-6 md:hidden"
           style={{
-            background: 'rgba(255,255,255,0.94)',
+            background: 'rgba(8,12,8,0.96)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
-            borderTop: '1px solid rgba(0,0,0,0.06)',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+            borderTop: '1px solid rgba(57,255,20,0.15)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
           }}
         >
           {NAV_LINKS.map((link) => (
@@ -102,19 +103,19 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className="nav-link py-3.5"
-              style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}
+              style={{ borderBottom: '1px solid rgba(57,255,20,0.08)' }}
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </a>
           ))}
-          <a
+          {/* <a
             href="#contact"
             className="btn-green mt-3 rounded-full px-5 py-3.5 text-center text-xs"
             onClick={() => setMenuOpen(false)}
           >
             Get Started
-          </a>
+          </a> */}
         </div>
       )}
     </nav>

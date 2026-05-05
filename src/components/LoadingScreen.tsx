@@ -64,18 +64,28 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
       {/* Center content */}
       <div className="relative flex flex-col items-center gap-6 px-8 text-center">
         {/* Logo wordmark */}
-        <h1
-          className="logo-text select-none"
-          style={{
-            fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-            fontWeight: 800,
-            letterSpacing: '0.08em',
-            lineHeight: 1,
-            textShadow: '0 0 40px rgba(57,255,20,0.12)',
-          }}
-        >
-          AISAKi DiGiTAL
-        </h1>
+       <h1
+  className="logo-text select-none"
+  style={{
+    fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+    fontWeight: 900,
+    letterSpacing: '0.06em',
+    lineHeight: 1,
+    textTransform: 'uppercase',
+
+    background:
+      'linear-gradient(135deg, #E8FFE8 0%, #5CFF72 35%, #00E83A 65%, #009E2F 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+
+    textShadow:
+      '0 0 18px rgba(0, 255, 85, 0.35), 0 0 42px rgba(0, 255, 85, 0.18)',
+    filter: 'drop-shadow(0 8px 24px rgba(0, 255, 85, 0.16))',
+  }}
+>
+  AISAKi DiGiTAL
+</h1>
 
         {/* Tagline */}
         <p
