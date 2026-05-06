@@ -12,24 +12,17 @@ function PartnerCard({ name, slug, abbr, logo, website_url }: ApiPartner) {
 
   const card = (
     <div
-      className="logo-card bg-whiteut group flex shrink-0 cursor-default items-center gap-4 rounded-2xl px-5 py-4 transition-all duration-300"
+      className="logo-cards bg-whiteut group flex shrink-0 cursor-default items-center gap-4 px-5 py-4 transition-all duration-300"
       
     >
       <div
-        className="flex h-40 w-40 shrink-0 items-center justify-center overflow-hidden rounded-xl"
-        style={{ background: 'rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.09)' }}
+        className="flex h-40 w-40 shrink-0 items-center justify-center overflow-hidden rounded-[100vh]"
+
       >
         {hasError ? (
           <span
             className="font-extrabold tracking-widest"
-            style={{
-              fontSize: '0.65rem',
-              background: 'linear-gradient(180deg, #E8E8E8 0%, #606060 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              letterSpacing: '0.1em',
-            }}
+           
           >
             {abbr}
           </span>
@@ -38,8 +31,8 @@ function PartnerCard({ name, slug, abbr, logo, website_url }: ApiPartner) {
           <img
             src={logoSrc}
             alt={name}
-            className="h-full w-full object-contain p-2"
-            style={{ filter: 'grayscale(1) brightness(0.55)' }}
+            className="h-full w-full object-contain p-2 rounded-[100vh]"
+            
             onError={() => setHasError(true)}
           />
         )}

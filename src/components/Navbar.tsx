@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const NAV_LINKS = [
-   { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'Work',     href: '#work' },
-  { label: 'Pricing',  href: '#pricing' },
+   { label: 'Home', href: '/' },
+   { label: 'Product', href: '/Product' },
+   { label: 'Project', href: '/Project' },
+   { label: 'Activities',  href: '/Activitie' },
+   { label: 'Abouts',  href: '/Abouts' },
 
-];
+
+ ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

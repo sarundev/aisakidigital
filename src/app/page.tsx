@@ -10,6 +10,7 @@ import Pricing from '@/components/sections/Pricing';
 import ContactCTA from '@/components/sections/ContactCTA';
 import Footer from '@/components/Footer';
 import Parther from '@/components/sections/Parther';
+import Activities from '@/components/sections/Activities';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -27,8 +28,9 @@ export default function Home() {
         <Parther />
         <Pricing />
         <Services />
-        <Portfolio />
-        <ContactCTA />
+        {/* <Activities /> */}
+        {/* <Portfolio /> */}
+        {/* <ContactCTA /> */}
         <Footer />
       </div>
     </>

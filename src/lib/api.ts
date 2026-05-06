@@ -63,10 +63,57 @@ export interface ContactPayload {
 
 // ─── Fetchers ─────────────────────────────────────────────────────────────────
 
+export interface ApiProduct {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  image: string | null;
+  price: string | null;
+  tags: string[];
+  demo_url: string | null;
+  is_featured: boolean;
+  is_active: boolean;
+  sort_order: number;
+}
+
+export interface ApiProject {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  image: string | null;
+  url: string | null;
+  tags: string[];
+  year: string;
+  status: 'Completed' | 'In Progress' | 'Upcoming';
+  client: string | null;
+  is_featured: boolean;
+  is_active: boolean;
+  sort_order: number;
+}
+
+export interface ApiActivity {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  date: string;
+  location: string | null;
+  image: string | null;
+  tags: string[] | null;
+  is_featured: boolean;
+  is_active: boolean;
+  sort_order: number;
+}
+
 export const fetchServices    = () => get<ApiService[]>('/services');
 export const fetchPricing     = () => get<ApiPricingPlan[]>('/pricing');
 export const fetchPortfolio   = () => get<ApiPortfolioItem[]>('/portfolio');
 export const fetchPartners    = () => get<ApiPartner[]>('/partners');
+export const fetchProducts    = () => get<ApiProduct[]>('/products');
+export const fetchProjects    = () => get<ApiProject[]>('/projects');
+export const fetchActivities  = () => get<ApiActivity[]>('/activities');
 
 export async function submitContact(payload: ContactPayload): Promise<void> {
   const res = await fetch(`${BASE}/contact`, {
