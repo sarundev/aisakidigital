@@ -18,6 +18,8 @@ export default function Navbar() {
   const [menuMounted, setMenuMounted] = useState(false);
   const [activeLink, setActiveLink] = useState('/');
 
+  const logoRef      = useRef<HTMLAnchorElement>(null);
+  const logoGlowRef  = useRef<HTMLDivElement>(null);
   const topBarRef    = useRef<SVGPathElement>(null);
   const middleBarRef = useRef<SVGPathElement>(null);
   const bottomBarRef = useRef<SVGPathElement>(null);
@@ -27,6 +29,46 @@ export default function Navbar() {
   const linkRefs     = useRef<HTMLLIElement[]>([]);
   const ctaRef       = useRef<HTMLDivElement>(null);
   const dividerRef   = useRef<HTMLDivElement>(null);
+
+  /* ─── logo animations ─── */
+  useEffect(() => {
+    gsap.fromTo(logoRef.current,
+      { opacity: 0, x: -22 },
+      { opacity: 1, x: 0, duration: 0.65, ease: 'power3.out', delay: 0.15 }
+    );
+    gsap.to(logoGlowRef.current, {
+      opacity: 0.75,
+      scale: 1.18,
+      duration: 2.2,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    });
+  }, []);
+
+  const handleLogoEnter = () => {
+    const tl = gsap.timeline();
+    tl.to(logoRef.current, { x: -3, duration: 0.04, ease: 'none' })
+      .to(logoRef.current, { x: 4,  duration: 0.04, ease: 'none' })
+      .to(logoRef.current, { x: -2, duration: 0.04, ease: 'none' })
+      .to(logoRef.current, { x: 0,  duration: 0.04, ease: 'none' })
+      .to(logoRef.current, {
+          scale: 1.055,
+          filter: 'drop-shadow(0 0 10px rgba(57,255,20,0.8)) drop-shadow(0 0 4px rgba(57,255,20,0.5))',
+          duration: 0.25,
+          ease: 'power2.out',
+        }, '-=0.04');
+  };
+
+  const handleLogoLeave = () => {
+    gsap.to(logoRef.current, {
+      scale: 1,
+      filter: 'drop-shadow(0 0 0px rgba(57,255,20,0))',
+      x: 0,
+      duration: 0.35,
+      ease: 'power2.inOut',
+    });
+  };
 
   /* ─── hamburger morphs ─── */
   const morphToX = () => {
@@ -127,14 +169,29 @@ export default function Navbar() {
         <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10 md:py-3.5">
 
           {/* Logo */}
-          <a href="/" className="relative z-10 flex-shrink-0">
+          <a
+            ref={logoRef}
+            href="/"
+            className="relative z-10 shrink-0 inline-flex"
+            onMouseEnter={handleLogoEnter}
+            onMouseLeave={handleLogoLeave}
+            style={{ willChange: 'transform, filter' }}
+          >
+            {/* Ambient glow behind logo */}
+            <div
+              ref={logoGlowRef}
+              className="pointer-events-none absolute -inset-4 -z-10 opacity-0"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(57,255,20,0.22) 0%, transparent 68%)',
+                filter: 'blur(12px)',
+              }}
+            />
             <Image
               src="/image/asakidigital.png"
               alt="AiSaki Digital"
               height={34}
               width={148}
               className="object-contain"
-              style={{ transition: 'opacity 0.2s ease' }}
             />
           </a>
 
@@ -227,7 +284,7 @@ export default function Navbar() {
           >
             {/* ── Decorative grid ── */}
             <div
-              className="pointer-events-none absolute inset-0"
+              className="pointer-events-none  absolute inset-0"
               style={{
                 backgroundImage:
                   'linear-gradient(rgba(57,255,20,1) 1px, transparent 1px), linear-gradient(90deg, rgba(57,255,20,1) 1px, transparent 1px)',
@@ -338,7 +395,7 @@ export default function Navbar() {
                 <span
                   style={{ color: 'rgba(255,255,255,25.18)', fontSize: '0.58rem', letterSpacing: '0.18em', fontFamily: 'monospace' }}
                 >
-                  ASAKI DIGITAL © 2025
+                  AISAKI DIGITAL © 2025
                 </span>
               </div>
             </div>

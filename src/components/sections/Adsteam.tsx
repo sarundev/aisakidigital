@@ -112,13 +112,7 @@ export default function Adsteam() {
                     }}
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-1" style={{ color: '#0A0A0A' }}>
-                    {member.name}
-                  </h3>
-                  <p className="text-green-600 font-semibold mb-3">{member.role}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
-                </div>
+                
               </div>
             ))}
           </div>

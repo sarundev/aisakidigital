@@ -28,8 +28,8 @@ export default function Home() {
         <Navbar />
         <Hero />
         <Parther />
-        <Ourteam/>
         <Adsteam/>
+        <Ourteam/>
         <Pricing />
         {/* <Services /> */}
         {/* <Activities /> */}

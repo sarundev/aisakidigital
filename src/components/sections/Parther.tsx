@@ -16,7 +16,7 @@ function PartnerCard({ name, slug, abbr, logo, website_url }: ApiPartner) {
       
     >
       <div
-        className="flex h-40 w-40 shrink-0 items-center justify-center overflow-hidden rounded-[100vh]"
+        className="flex w-28 h-28 shrink-0 items-center justify-center overflow-hidden rounded-[100vh]"
 
       >
         {hasError ? (
