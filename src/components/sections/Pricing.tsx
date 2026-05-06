@@ -188,7 +188,6 @@ export default function Pricing() {
                   <div
                     key={plan.id}
                     className="relative flex flex-col rounded-2xl p-7 transition-all duration-300 flex-shrink-0"
-                    style={{ width: '320px' }}
                     data-aos="fade-up"
                     data-aos-delay={String(i * 100)}
                     suppressHydrationWarning={true}
