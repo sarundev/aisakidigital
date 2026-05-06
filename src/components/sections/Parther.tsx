@@ -188,7 +188,7 @@ export default function Parther() {
         )}
       </div>
 
-      <div className="relative mx-auto mt-16 max-w-7xl px-6 reveal reveal-delay-3">
+      {/* <div className="relative mx-auto mt-16 max-w-7xl px-6 reveal reveal-delay-3">
         <div
           className="grid grid-cols-3 rounded-2xl"
           style={{ background: 'rgba(255,255,255,0.8)', border: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
@@ -215,7 +215,7 @@ export default function Parther() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
