@@ -179,7 +179,104 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3 items-start">
+        {/* Mobile: Horizontal Scroll */}
+        <div className="md:hidden overflow-x-auto pb-4">
+          <div className="flex gap-5 w-max">
+            {loading
+              ? [false, true, false].map((tall, i) => <SkeletonCard key={i} tall={tall} />)
+              : plans.map((plan, i) => (
+                  <div
+                    key={plan.id}
+                    className="relative flex flex-col rounded-2xl p-7 transition-all duration-300 flex-shrink-0"
+                    style={{ width: '320px' }}
+                    data-aos="fade-up"
+                    data-aos-delay={String(i * 100)}
+                    suppressHydrationWarning={true}
+                    style={
+                      plan.is_popular
+                        ? {
+                            background: 'rgba(6,20,8,0.97)',
+                            border: '1.5px solid rgba(57,255,20,0.5)',
+                            boxShadow: '0 0 50px rgba(57,255,20,0.14), 0 0 100px rgba(57,255,20,0.05), inset 0 1px 0 rgba(57,255,20,0.12)',
+                            marginTop: '-8px',
+                            width: '320px',
+                          }
+                        : {
+                            background: 'rgba(5,10,12,0.92)',
+                            border: '1px solid rgba(255,255,255,0.07)',
+                            width: '320px',
+                          }
+                    }
+                  >
+                    {plan.is_popular && (
+                      <div className="absolute -top-5 left-0 right-0 flex flex-col items-center gap-1">
+                        <span
+                          className="flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-bold"
+                          style={{ background: '#39FF14', color: '#000', letterSpacing: '0.04em' }}
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="#000">
+                            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                          </svg>
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+
+                    <p className="mb-3 font-bold" style={{ color: '#ffffff', fontSize: '1.05rem', letterSpacing: '0.02em' }}>
+                      {plan.name}
+                    </p>
+
+                    <div className="mb-6 flex items-end gap-1.5 pb-6" style={{ borderBottom: '1px solid rgba(57,255,20,0.1)' }}>
+                      <span className="font-extrabold leading-none" style={{ color: '#ffffff', fontSize: 'clamp(2.2rem, 5vw, 2.8rem)' }}>
+                        {plan.price}
+                      </span>
+                      {plan.period && (
+                        <span className="mb-1 text-sm font-medium" style={{ color: plan.is_popular ? '#39FF14' : '#506050' }}>
+                          {plan.period}
+                        </span>
+                      )}
+                    </div>
+
+                    <ul className="mb-8 flex flex-col gap-3.5">
+                      {plan.features.map((f, j) => (
+                        <li key={j} className="flex items-center gap-3">
+                          <CheckIcon />
+                          <span style={{ color: '#c8e8c8', fontSize: '0.875rem' }}>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <button
+                      className="mt-auto flex w-full items-center justify-center gap-2.5 rounded-xl py-3.5 font-semibold transition-all duration-200"
+                      style={
+                        plan.is_popular
+                          ? { background: '#39FF14', color: '#000', fontSize: '0.9rem', letterSpacing: '0.04em', boxShadow: '0 0 20px rgba(57,255,20,0.35)' }
+                          : { background: 'rgba(255,255,255,0.05)', color: '#c8e8c8', border: '1px solid rgba(57,255,20,0.15)', fontSize: '0.9rem', letterSpacing: '0.04em' }
+                      }
+                      onClick={() => setPopupPlan(plan)}
+                      onMouseEnter={(e) => {
+                        if (!plan.is_popular) {
+                          e.currentTarget.style.background = 'rgba(57,255,20,0.08)';
+                          e.currentTarget.style.borderColor = 'rgba(57,255,20,0.4)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!plan.is_popular) {
+                          e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                          e.currentTarget.style.borderColor = 'rgba(57,255,20,0.15)';
+                        }
+                      }}
+                    >
+                      <SendIcon />
+                      Get Started
+                    </button>
+                  </div>
+                ))}
+          </div>
+        </div>
+
+        {/* Desktop: Grid Layout */}
+        <div className="hidden md:grid gap-5 md:grid-cols-3 items-start">
           {loading
             ? [false, true, false].map((tall, i) => <SkeletonCard key={i} tall={tall} />)
             : plans.map((plan, i) => (

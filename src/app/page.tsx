@@ -11,6 +11,8 @@ import ContactCTA from '@/components/sections/ContactCTA';
 import Footer from '@/components/Footer';
 import Parther from '@/components/sections/Parther';
 import Activities from '@/components/sections/Activities';
+import Ourteam from '@/components/sections/Ourteam';
+import Adsteam from '@/components/sections/Adsteam';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -26,8 +28,10 @@ export default function Home() {
         <Navbar />
         <Hero />
         <Parther />
+        <Ourteam/>
+        <Adsteam/>
         <Pricing />
-        <Services />
+        {/* <Services /> */}
         {/* <Activities /> */}
         {/* <Portfolio /> */}
         {/* <ContactCTA /> */}

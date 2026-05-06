@@ -6,6 +6,7 @@ import SupporterPopup from './SupporterPopup';
 const LINKS = {
   Services: ['Web Design', 'Brand Identity', 'Digital Marketing', 'Mobile Apps', 'SEO & Growth'],
   Company:  ['About Us', 'Our Work', 'Careers', 'Blog', 'Contact'],
+ 
 };
 
 const SOCIALS = [
@@ -41,33 +42,9 @@ const SOCIALS = [
   },
 ];
 
-const TAGLINE_WORDS = [
-  'Premium', 'digital', 'services', 'for', 'brands', 'that', 'demand',
-  'excellence.', 'We', 'build', 'experiences', 'that', 'convert.',
-];
 
-function AnimatedTagline({ visible }: { visible: boolean }) {
-  return (
-    <p className="mb-6 max-w-xs leading-relaxed" style={{ fontSize: '0.875rem' }}>
-      {TAGLINE_WORDS.map((word, i) => (
-        <span
-          key={i}
-          style={{
-            display: 'inline-block',
-            marginRight: '0.28em',
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(10px)',
-            transition: `opacity 0.5s cubic-bezier(0.22,1,0.36,1) ${0.04 + i * 0.055}s, transform 0.5s cubic-bezier(0.22,1,0.36,1) ${0.04 + i * 0.055}s`,
-            color: i === TAGLINE_WORDS.length - 1 || word === 'excellence.' ? '#222222' : '#666666',
-            fontWeight: word === 'Premium' || word === 'excellence.' || word === 'convert.' ? 600 : 400,
-          }}
-        >
-          {word}
-        </span>
-      ))}
-    </p>
-  );
-}
+
+
 
 function AnimatedLink({ label }: { label: string }) {
   const [hovered, setHovered] = useState(false);
@@ -128,38 +105,24 @@ export default function Footer() {
       ref={footerRef}
       style={{ background: 'linear-gradient(180deg, #f7f9fc 0%, #ffffff 100%)', borderTop: '1px solid rgba(0,0,0,0.07)' }}
     >
-      {/* Top brand accent line */}
-      <div
-        style={{
-          height: '2px',
-          background: 'linear-gradient(90deg, transparent 0%, rgba(57,255,20,0.5) 30%, rgba(57,255,20,0.8) 50%, rgba(57,255,20,0.5) 70%, transparent 100%)',
-          transformOrigin: 'left',
-          transform: visible ? 'scaleX(1)' : 'scaleX(0)',
-          transition: 'transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s',
-        }}
-      />
-
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr]">
-
-          {/* Brand column */}
-          <div
+       <div
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0)' : 'translateY(28px)',
               transition: 'opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s',
             }}
+            
           >
             {/* Logo */}
             <div
-              className="logo-text-static mb-1 select-none font-extrabold tracking-widest"
-              style={{ fontSize: '1.1rem' }}
+              className="logo-text-static mb-1 select-none font-extrabold tracking-widest text-center text-lg sm:text-xl"
             >
               AiSAKi DiGiTAL
             </div>
 
             {/* Accent line under logo */}
             <div
+              className="mx-auto"
               style={{
                 height: '1.5px',
                 width: '2.5rem',
@@ -171,10 +134,10 @@ export default function Footer() {
               }}
             />
 
-            <AnimatedTagline visible={visible} />
+        
 
             {/* Socials */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center justify-center gap-2.5">
               {SOCIALS.map((s, i) => (
                 <a
                   key={s.label}
@@ -214,11 +177,28 @@ export default function Footer() {
             {/* Support Us Button */}
            
           </div>
+      {/* Top brand accent line */}
+      <div
+        style={{
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(57,255,20,0.5) 30%, rgba(57,255,20,0.8) 50%, rgba(57,255,20,0.5) 70%, transparent 100%)',
+          transformOrigin: 'left',
+          transform: visible ? 'scaleX(1)' : 'scaleX(0)',
+          transition: 'transform 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s',
+        }}
+      />
+
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr] grid-cols-2">
+
+          {/* Brand column */}
+         
 
           {/* Link columns */}
           {Object.entries(LINKS).map(([heading, items], colIdx) => (
             <div
               key={heading}
+              className="flex flex-col sm:flex-row"
               style={{
                 opacity: visible ? 1 : 0,
                 transform: visible ? 'translateY(0)' : 'translateY(28px)',
@@ -226,12 +206,12 @@ export default function Footer() {
               }}
             >
               <p
-                className="mb-5 text-xs font-semibold uppercase tracking-[0.35em]"
+                className="mb-5 text-xs font-semibold uppercase tracking-[0.35em] text-center"
                 style={{ color: '#333333' }}
               >
                 {heading}
               </p>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-3 items-center">
                 {items.map((item, itemIdx) => (
                   <li
                     key={item}
