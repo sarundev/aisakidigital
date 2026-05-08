@@ -6,10 +6,9 @@ import { gsap } from 'gsap';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Product', href: '/Product' },
-  { label: 'Project', href: '/Project' },
-  { label: 'Activities', href: '/Activitie' },
-  { label: 'Abouts', href: '/Abouts' },
+  { label: 'PRODUCT', href: '/Product' },
+  { label: 'SERVICE', href: '/Project' },
+  { label: 'ABOUT', href: '/Abouts' },
 ];
 
 export default function Navbar() {
@@ -210,7 +209,7 @@ export default function Navbar() {
                     <span
                       style={{
                         color: isActive ? '#39FF14' : 'rgba(205,205,205,0.82)',
-                        fontSize: '0.8rem',
+                        fontSize: '1.2rem',
                         fontWeight: 500,
                         letterSpacing: '0.07em',
                         fontFamily: 'var(--font-geist-sans), sans-serif',
@@ -224,13 +223,13 @@ export default function Navbar() {
                     <span
                       className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all duration-300"
                       style={{
-                        width: isActive ? '1.2rem' : '0',
+                        width: isActive ? '2rem' : '',
                         background: '#39FF14',
                         boxShadow: '0 0 8px rgba(57,255,20,0.8)',
                       }}
                     />
                     <span
-                      className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 rounded-full transition-all duration-300 group-hover:w-4"
+                      className="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 rounded-full transition-all duration-300 group-hover:w-8"
                       style={{ background: 'rgba(57,255,20,0.5)' }}
                     />
                   </a>

@@ -113,14 +113,8 @@ export default function Hero() {
         className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-1.5"
         style={{ animation: 'fade-in 1s ease 2s both' }}
       >
-        <span className="uppercase" style={{ color: '#39FF14', fontSize: '0.6rem', letterSpacing: '0.38em', opacity: 0.55 }}>
-          Scroll
-        </span>
-        <div className="scroll-indicator" style={{ color: '#39FF14', opacity: 0.55 }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </div>
+        
+        
       </div>
     </section>
   );

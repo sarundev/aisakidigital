@@ -63,7 +63,7 @@ export default function Ourteam() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto py-4 px-6">
         {/* Header */}
         <div className="mb-16 text-center reveal">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.45em] text-green-600">
@@ -100,10 +100,39 @@ export default function Ourteam() {
             //   background: 'linear-gradient(to left, rgba(248,249,250,1), rgba(248,249,250,0))',
             // }}
           />
-          <div
+          <div className="relative hidden md:block">
+           <div
             className="flex gap-6"
             style={{
-              animation: 'marquee-reverse 25s linear infinite',
+              animation: 'marquee-reverse 40s linear infinite',
+              width: 'max-content',
+            }}
+          >
+            {[...TEAM_MEMBERS, ...TEAM_MEMBERS].map((member, index) => (
+              <div
+                key={`${member.name}-${index}`}
+                className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100 flex-shrink-0"
+                 style={{ width: '1260px', height: '820px' }}
+              >
+                <div className=" overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      e.currentTarget.src = '/image/team/placeholder.jpg';
+                    }}
+                  />
+                </div>
+               
+              </div>
+            ))}
+          </div>
+          </div>
+          <div
+            className="flex gap-6 md:hidden"
+            style={{
+              animation: 'marquee-reverse 40s linear infinite',
               width: 'max-content',
             }}
           >

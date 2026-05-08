@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 const STATIC_WORDS  = ['AISAKIDIGITAL'];
-const CYCLING_WORDS = ['Booster','Designer','Facebook Page'];
+const CYCLING_WORDS = ['Facebook Page','Advertiser','Digital Marketing','Production Team','Commercial TVC','PE Promoter','Branding Build'];
 
 export default function TypewriterText() {
   const [wordIndex,   setWordIndex  ] = useState(0);

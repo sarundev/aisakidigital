@@ -166,13 +166,13 @@ export default function Pricing() {
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="mb-16 text-center" data-aos="fade-up" suppressHydrationWarning={true}>
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.45em]" style={{ color: '#39FF14' }}>
-            Pricing Services
+           Purpular Service
           </p>
           <h2
             className="logo-text-static leading-tight"
             style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 800, letterSpacing: '-0.01em' }}
           >
-            Choose Your Service
+            ជ្រើសរើសកញ្ចប់សេវាកម្មពេញនិយម
           </h2>
           <p className="mx-auto mt-4 max-w-md leading-relaxed" style={{ color: '#555555', fontSize: '0.9rem' }}>
             Flexible plans designed to scale with your business. No hidden fees.

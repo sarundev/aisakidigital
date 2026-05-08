@@ -1,5 +1,5 @@
-const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000/api/v1';
-export const STORAGE = process.env.NEXT_PUBLIC_STORAGE_URL ?? 'http://localhost:8000';
+const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8080/api/v1';
+export const STORAGE = process.env.NEXT_PUBLIC_STORAGE_URL ?? 'http://localhost:8080';
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`, { next: { revalidate: 60 } });
@@ -67,9 +67,12 @@ export interface ApiProduct {
   id: number;
   name: string;
   category: string;
+  duration: string | null;
   description: string;
   image: string | null;
   price: string | null;
+  price_unit: string | null;
+  stock_quantity: number;
   tags: string[];
   demo_url: string | null;
   is_featured: boolean;

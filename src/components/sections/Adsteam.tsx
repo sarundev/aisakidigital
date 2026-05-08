@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const ADS_TEAM_MEMBERS = [
   {
     name: 'Alex Rivera',
     role: 'Ads Strategist',
     bio: 'Expert in PPC campaigns and conversion optimization.',
-    image: 'https://www.unicef.org/cambodia/sites/unicef.org.cambodia/files/styles/media_large_image/public/thumbnail_Social%20Work_20200520_1.jpg.webp?itok=e4H4KzLv',
+    image: 'https://miro.medium.com/v2/resize:fit:1400/1*dwLGnkgwmMSU7XN7Yojo1g.png',
   },
   {
     name: 'Emma Chen',
@@ -31,6 +31,7 @@ const ADS_TEAM_MEMBERS = [
 
 export default function Adsteam() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [lightbox, setLightbox] = useState<{ image: string; name: string } | null>(null);
 
   useEffect(() => {
     const els = sectionRef.current?.querySelectorAll('.reveal');
@@ -43,6 +44,17 @@ export default function Adsteam() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightbox(null); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [lightbox]);
+
   return (
     <section
       ref={sectionRef}
@@ -52,7 +64,7 @@ export default function Adsteam() {
     >
 
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto py-8 px-6">
         {/* Header */}
         <div className="mb-16 text-center reveal">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.45em] text-green-600">
@@ -89,30 +101,68 @@ export default function Adsteam() {
             //   background: 'linear-gradient(to left, rgba(248,249,250,1), rgba(248,249,250,0))',
             // }}
           />
+          <div className="relative hidden md:block">
+            <div
+              className="flex gap-5"
+              style={{
+                animation: 'marquee-reverse 40s linear infinite',
+                width: 'max-content',
+              }}
+            >
+              {[...ADS_TEAM_MEMBERS, ...ADS_TEAM_MEMBERS].map((member, index) => (
+                <div
+                  key={`${member.name}-${index}`}
+                  className="group relative shrink-0 cursor-pointer overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500"
+                  style={{ width: '1260px', height: '820px' }}
+                  onClick={() => setLightbox({ image: member.image, name: member.name })}
+                >
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => { e.currentTarget.src = '/image/ads-team/placeholder.jpg'; }}
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                    <div
+                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-full"
+                      style={{ width: 52, height: 52, background: 'rgba(255,255,255,0.18)', backdropFilter: 'blur(6px)', border: '1.5px solid rgba(255,255,255,0.4)' }}
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
           <div
-            className="flex gap-6"
+            className=" flex gap-6 md:hidden"
             style={{
-              animation: 'marquee-reverse 25s linear infinite',
+              animation: 'marquee-reverse 40s linear infinite',
               width: 'max-content',
             }}
           >
             {[...ADS_TEAM_MEMBERS, ...ADS_TEAM_MEMBERS].map((member, index) => (
               <div
                 key={`${member.name}-${index}`}
-                className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100 flex-shrink-0"
+                className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100 shrink-0 cursor-pointer"
                 style={{ width: '280px' }}
+                onClick={() => setLightbox({ image: member.image, name: member.name })}
               >
-                <div className="aspect-[4/5] overflow-hidden">
+                <div className="aspect-[4/5] overflow-hidden relative">
                   <img
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      e.currentTarget.src = '/image/ads-team/placeholder.jpg';
-                    }}
+                    onError={(e) => { e.currentTarget.src = '/image/ads-team/placeholder.jpg'; }}
                   />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                    <svg className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                  </div>
                 </div>
-                
               </div>
             ))}
           </div>
@@ -120,6 +170,32 @@ export default function Adsteam() {
 
 
       </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(8px)' }}
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200"
+            style={{ background: 'rgba(255,255,255,0.12)', color: '#fff' }}
+            onClick={() => setLightbox(null)}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={lightbox.image}
+            alt={lightbox.name}
+            className="max-h-[90vh] max-w-[90vw] rounded-2xl object-contain shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+            onError={(e) => { e.currentTarget.src = '/image/ads-team/placeholder.jpg'; }}
+          />
+        </div>
+      )}
     </section>
   );
 }

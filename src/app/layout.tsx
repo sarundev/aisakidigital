@@ -21,8 +21,12 @@ const notoSansKhmer = Noto_Sans_Khmer({
 });
 
 export const metadata: Metadata = {
-  title: "AiSaki Digital",
+  title: "AISAKIDigital",
   description: "Professional Digital Services",
+  icons: {
+    icon: '/image/logo.png',
+    apple: '/image/logo.png',
+  },
 };
 
 export default function RootLayout({
