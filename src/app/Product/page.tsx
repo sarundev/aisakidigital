@@ -287,6 +287,19 @@ function CategoryIcon({ category }: { category: string }) {
       </svg>
     );
   }
+  if (cat === 'instagram') {
+    return (
+      <img src="/image/instagram.png" alt="Instagram" width={20} height={20} style={{ borderRadius: 5, display: 'block' }} />
+    );
+  }
+  if (cat === 'telegram') {
+    return (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="12" fill="#24A1DE" />
+        <path d="M17.5 6.5l-2.1 10.2c-.15.7-.56.87-1.13.54l-3.13-2.3-1.51 1.45c-.17.17-.31.31-.63.31l.22-3.17 5.74-5.19c.25-.22-.05-.34-.39-.12L6.1 13.5 3.1 12.57c-.67-.21-.68-.67.14-.99l13.25-5.11c.56-.2 1.05.14.87.99z" fill="white" />
+      </svg>
+    );
+  }
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -304,7 +317,7 @@ function ProductRow({ product }: { product: ApiProduct }) {
   const stockCount = (product.stock_quantity ?? 0) > 0 ? product.stock_quantity : null;
   const priceUnit = product.price_unit ?? product.tags[0] ?? 'per unit';
   const inStock = product.is_active;
-  const isSocial = ['facebook', 'tiktok'].includes(product.category.toLowerCase());
+  const isSocial = ['facebook', 'tiktok', 'instagram', 'telegram'].includes(product.category.toLowerCase());
 
   return (
     <>
@@ -585,9 +598,10 @@ export default function ProductPage() {
 
             <h1
               className="font-black leading-tight mb-4"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#111111', letterSpacing: '-0.025em' }}
+              
+              style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)',fontFamily: 'var(--font-khmer), sans-serif', color: '#111111', letterSpacing: '-0.025em' }}
             >
-              តារា​តម្លៃ​ផេកខ្មែរ​ល្អៗ{' '}
+              តារា​តម្លៃ Social Media{' '}
               <span
                 style={{
                   background: 'linear-gradient(135deg, #1a7a05 0%, #39FF14 60%, #1a7a05 100%)',
@@ -596,7 +610,7 @@ export default function ProductPage() {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-               & TikTok
+               ល្អៗ Build ថ្មីៗ
               </span>
             </h1>
             <p className="mx-auto max-w-md text-base leading-relaxed" style={{ color: '#666666' }}>
@@ -706,7 +720,7 @@ export default function ProductPage() {
                   borderBottom: '1px solid rgba(57,255,20,0.1)',
                 }}
               >
-                {['PRODUCT TYPE', 'DURATION', 'PRICE', 'STOCK STATUS', ''].map((label, i) => (
+                {['PRODUCT TYPE', ' WARRANTY', 'PRICE', 'STOCK STATUS', ''].map((label, i) => (
                   <div key={i} className="flex items-center">
                     {label && (
                       <span
