@@ -170,7 +170,12 @@ export default function Pricing() {
           </p>
           <h2
             className="logo-text-static leading-tight"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 800, letterSpacing: '-0.01em' }}
+            style={{
+              fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+              fontWeight: 800,
+              letterSpacing: '-0.01em',
+              fontFamily: 'var(--font-khmer), sans-serif',
+            }}
           >
             ជ្រើសរើសកញ្ចប់សេវាកម្មពេញនិយម
           </h2>

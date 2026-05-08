@@ -426,8 +426,8 @@ function ProductRow({ product }: { product: ApiProduct }) {
 
         {/* ── Desktop Row ── */}
         <div
-          className="hidden sm:grid items-center gap-6 px-7 py-5"
-          style={{ gridTemplateColumns: '2.2fr 1fr 1.1fr 1.5fr auto' }}
+          className="hidden sm:grid items-center gap-6 px-7 py-5 grid-cols-3"
+      
         >
           {/* ── Mail Type ── */}
           <div className="flex items-center gap-4 min-w-0">
@@ -492,7 +492,7 @@ function ProductRow({ product }: { product: ApiProduct }) {
           </div>
 
           {/* ── Stock Status ── */}
-          <div className="flex flex-col gap-1.5">
+          {/* <div className="flex flex-col gap-1.5">
             <span
               className="inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
               style={
@@ -532,7 +532,7 @@ function ProductRow({ product }: { product: ApiProduct }) {
                 </span>
               </p>
             )}
-          </div>
+          </div> */}
 
           {/* ── Order Button ── */}
           
@@ -713,14 +713,14 @@ export default function ProductPage() {
 
               {/* Header */}
               <div
-                className="hidden sm:grid items-center gap-6 px-7 py-3.5"
+                className="hidden sm:grid grid-cols-3 items-center gap-6 px-7 py-3.5"
                 style={{
-                  gridTemplateColumns: '2.2fr 1fr 1.1fr 1.5fr auto',
+                 
                   background: 'linear-gradient(180deg, rgba(57,255,20,0.04) 0%, rgba(57,255,20,0.01) 100%)',
                   borderBottom: '1px solid rgba(57,255,20,0.1)',
                 }}
               >
-                {['PRODUCT TYPE', ' WARRANTY', 'PRICE', 'STOCK STATUS', ''].map((label, i) => (
+                {['PRODUCT TYPE', ' WARRANTY', 'PRICE', ''].map((label, i) => (
                   <div key={i} className="flex items-center">
                     {label && (
                       <span

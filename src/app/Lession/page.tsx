@@ -28,38 +28,36 @@ function useCountdown(target: Date) {
 function Digit({ value, label }: { value: number; label: string }) {
   const display = String(value).padStart(2, '0');
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center gap-1.5 sm:gap-2">
       <div
-        className="relative flex items-center justify-center rounded-2xl"
+        className="relative flex items-center justify-center rounded-xl sm:rounded-2xl"
         style={{
-          width: 'clamp(72px, 16vw, 112px)',
-          height: 'clamp(80px, 18vw, 124px)',
+          width: 'clamp(60px, 18vw, 112px)',
+          height: 'clamp(68px, 20vw, 124px)',
           background: 'rgba(255,255,255,0.06)',
           border: '1px solid rgba(255,255,255,0.12)',
           backdropFilter: 'blur(12px)',
           boxShadow: '0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1)',
         }}
       >
-        {/* top shine */}
         <div
-          className="absolute top-0 left-4 right-4 h-px"
+          className="absolute top-0 left-3 right-3 h-px"
           style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)' }}
         />
-        {/* horizontal divider */}
         <div
           className="absolute left-0 right-0"
           style={{ top: '50%', height: '1px', background: 'rgba(0,0,0,0.35)' }}
         />
         <span
           className="font-black tabular-nums"
-          style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)', color: '#ffffff', letterSpacing: '-0.03em', lineHeight: 1 }}
+          style={{ fontSize: 'clamp(1.6rem, 7vw, 3.5rem)', color: '#ffffff', letterSpacing: '-0.03em', lineHeight: 1 }}
         >
           {display}
         </span>
       </div>
       <span
-        className="text-xs font-bold uppercase tracking-widest"
-        style={{ color: 'rgba(255,255,255,0.45)', letterSpacing: '0.18em' }}
+        className="text-[9px] sm:text-xs font-bold uppercase"
+        style={{ color: 'rgba(255,255,255,0.45)', letterSpacing: '0.15em' }}
       >
         {label}
       </span>
@@ -76,7 +74,7 @@ export default function LessionPage() {
     <>
       <Navbar />
       <main
-        className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 py-32"
+        className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 py-24 sm:py-32"
         style={{ background: '#080c10' }}
       >
         {/* Background glow blobs */}
@@ -104,41 +102,40 @@ export default function LessionPage() {
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)',
-            backgroundSize: '36px 36px',
+            backgroundSize: '28px 28px',
           }}
         />
 
-        <div className="relative mx-auto max-w-3xl text-center">
+        <div className="relative mx-auto w-full max-w-3xl text-center">
 
           {/* Badge */}
           <div
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full px-5 py-2"
+            className="mb-6 sm:mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 sm:px-5 sm:py-2"
             style={{
               background: 'rgba(57,255,20,0.08)',
               border: '1px solid rgba(57,255,20,0.2)',
             }}
           >
-            <span
-              className="relative flex h-2 w-2"
-            >
+            <span className="relative flex h-2 w-2">
               <span
                 className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
                 style={{ background: '#39FF14', animationDuration: '1.8s' }}
               />
               <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: '#39FF14' }} />
             </span>
-            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: '#39FF14' }}>
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest" style={{ color: '#39FF14' }}>
               Coming Soon
             </span>
           </div>
 
           {/* Heading */}
           <h1
-            className="font-black leading-tight mb-5"
+            className="font-black leading-snug mb-4 sm:mb-5 px-2"
             style={{
-              fontSize: 'clamp(2.2rem, 6vw, 4rem)',
+              fontSize: 'clamp(1.8rem, 8vw, 4rem)',
               color: '#ffffff',
-              letterSpacing: '-0.03em',
+              letterSpacing: '-0.01em',
+              fontFamily: 'var(--font-khmer), sans-serif',
             }}
           >
             មេរៀន{' '}
@@ -156,35 +153,43 @@ export default function LessionPage() {
             កំពុងរៀបចំ
           </h1>
 
+          {/* Subtitle */}
           <p
-            className="mx-auto mb-14 max-w-md text-base leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.45)' }}
+            className="mx-auto mb-10 sm:mb-14 max-w-sm sm:max-w-md text-sm sm:text-base leading-relaxed px-2"
+            style={{ color: 'rgba(255,255,255,0.45)', fontFamily: 'var(--font-khmer), sans-serif' }}
           >
             យើងកំពុងរៀបចំមាតិកាដ៏ល្អបំផុតសម្រាប់អ្នក។ សូមមើលការចុះឈ្មោះជាមុន ដើម្បីទទួលបានការជូនដំណឹងទី១។
           </p>
 
           {/* Countdown */}
-          <div className="mb-14 flex items-start justify-center gap-4 sm:gap-6">
+          <div className="mb-10 sm:mb-14 flex items-start justify-center gap-2 sm:gap-4">
             <Digit value={days} label="Days" />
-            <div className="mt-4 text-3xl font-black" style={{ color: 'rgba(255,255,255,0.25)', lineHeight: 1 }}>:</div>
+            <div
+              className="font-black"
+              style={{ color: 'rgba(255,255,255,0.25)', lineHeight: 1, fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', marginTop: '18px' }}
+            >:</div>
             <Digit value={hours} label="Hours" />
-            <div className="mt-4 text-3xl font-black" style={{ color: 'rgba(255,255,255,0.25)', lineHeight: 1 }}>:</div>
+            <div
+              className="font-black"
+              style={{ color: 'rgba(255,255,255,0.25)', lineHeight: 1, fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', marginTop: '18px' }}
+            >:</div>
             <Digit value={minutes} label="Mins" />
-            <div className="mt-4 text-3xl font-black" style={{ color: 'rgba(255,255,255,0.25)', lineHeight: 1 }}>:</div>
+            <div
+              className="font-black"
+              style={{ color: 'rgba(255,255,255,0.25)', lineHeight: 1, fontSize: 'clamp(1.4rem, 5vw, 2.2rem)', marginTop: '18px' }}
+            >:</div>
             <Digit value={seconds} label="Secs" />
           </div>
 
           {/* Notify form */}
           {!submitted ? (
-            <div
-              className="mx-auto flex max-w-md flex-col sm:flex-row gap-3"
-            >
+            <div className="mx-auto flex w-full max-w-sm sm:max-w-md flex-col gap-3 px-2 sm:px-0">
               <input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 rounded-2xl px-5 py-3.5 text-sm outline-none"
+                className="w-full rounded-2xl px-4 sm:px-5 py-3.5 text-sm outline-none"
                 style={{
                   background: 'rgba(255,255,255,0.07)',
                   border: '1px solid rgba(255,255,255,0.12)',
@@ -196,34 +201,32 @@ export default function LessionPage() {
               />
               <button
                 onClick={() => { if (email.trim()) setSubmitted(true); }}
-                className="shrink-0 rounded-2xl px-6 py-3.5 text-sm font-bold transition-all duration-200"
+                className="w-full rounded-2xl px-6 py-3.5 text-sm font-bold transition-all duration-200"
                 style={{
                   background: 'linear-gradient(135deg, #39FF14, #2ee60f)',
                   color: '#000000',
                   boxShadow: '0 4px 20px rgba(57,255,20,0.35)',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 6px 28px rgba(57,255,20,0.55)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 4px 20px rgba(57,255,20,0.35)'; }}
               >
                 Notify Me
               </button>
             </div>
           ) : (
             <div
-              className="mx-auto flex max-w-md items-center gap-3 rounded-2xl px-6 py-4"
+              className="mx-2 sm:mx-auto flex max-w-sm sm:max-w-md items-center gap-3 rounded-2xl px-5 py-4"
               style={{ background: 'rgba(57,255,20,0.08)', border: '1px solid rgba(57,255,20,0.2)' }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#39FF14" strokeWidth="2.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#39FF14" strokeWidth="2.5" className="shrink-0">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
-              <span className="text-sm font-semibold" style={{ color: '#39FF14' }}>
+              <span className="text-sm font-semibold text-left" style={{ color: '#39FF14', fontFamily: 'var(--font-khmer), sans-serif' }}>
                 អរគុណ! យើងនឹងជូនដំណឹងអ្នកនៅពេលដាច់ 🎉
               </span>
             </div>
           )}
 
           {/* Progress bar */}
-          <div className="mt-16 mx-auto max-w-xs">
+          <div className="mt-12 sm:mt-16 mx-auto w-full max-w-50 sm:max-w-xs px-2 sm:px-0">
             <div className="mb-2 flex justify-between text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
               <span>Progress</span>
               <span>65%</span>

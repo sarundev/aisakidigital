@@ -211,7 +211,7 @@ export default function Navbar() {
                       style={{
                         color: isActive ? '#39FF14' : 'rgba(205,205,205,0.82)',
                         fontSize: '1.2rem',
-                        fontWeight: 500,
+                        fontWeight: 900,
                         letterSpacing: '0.07em',
                         fontFamily: 'var(--font-geist-sans), sans-serif',
                         transition: 'color 0.22s ease',
