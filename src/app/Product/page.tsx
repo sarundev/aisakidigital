@@ -342,11 +342,11 @@ function ProductRow({ product }: { product: ApiProduct }) {
         />
 
         {/* ── Mobile Card ── */}
-        <div className="flex sm:hidden flex-col gap-1 py-3 px-3">
+        <div className="flex sm:hidden flex-col gap-1 py-1 px-1">
           {/* Row 1: Icon + Name + Stock badge */}
           <div className="flex items-center gap-3">
             <div
-              className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
+              className="relative flex  shrink-0 items-center justify-center rounded-2xl"
               style={{
                 background: 'linear-gradient(135deg, rgba(57,255,20,0.13) 0%, rgba(57,255,20,0.05) 100%)',
                 border: '1px solid rgba(57,255,20,0.25)',
@@ -355,21 +355,10 @@ function ProductRow({ product }: { product: ApiProduct }) {
               onClick={isSocial ? () => setModal(true) : undefined}
             >
               <CategoryIcon category={product.category} />
-              {product.is_featured && (
               
-                <span
-                  className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full"
-                  style={{ background: 'linear-gradient(135deg, #39FF14, #2ee60f)', boxShadow: '0 2px 8px rgba(57,255,20,0.5)' }}
-                >
-               
-                  <svg width="8" height="8" viewBox="0 0 24 24" fill="#000">
-                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-                  </svg>
-                </span>
-              )}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-extrabold truncate" style={{ color: '#111111' }}>{product.name}</p>
+              <p className=" font-extrabold truncate" style={{ color: '#111111' , fontSize:'10px' }}>{product.name}</p>
               <p className="text-xs mt-0.5" style={{ color: '#999999' }}>{product.category}</p>
             </div>
 
@@ -395,18 +384,19 @@ function ProductRow({ product }: { product: ApiProduct }) {
             
               {inStock ? 'In Stock' : 'Out'}
             </span>
-            <p className="ml-4 text-green-900 text-sm">{qty}</p>
+            <p className="ml-2 text-green-900 " style={{fontSize:'8px'}}>{qty}</p>
             </div>
             <div className="block">
-             <div className="grid ml-4 items-baseline">
-                <span className="text-md font-black" style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>{product.price}</span>
+             <div className="grid ml-2 items-baseline">
+                <span className=" font-black" style={{ color: '#1a7a05', letterSpacing: '-0.02em',fontSize:'10px' }}>{product.price}</span>
               </div>
              <button
               onClick={() => setModal(true)}
-              className="shrink-0 flex items-center gap-1.5 rounded-2xl px-4 py-1 text-sm font-bold"
+              className="shrink-0 flex items-center gap-1.5 rounded-2xl px-2 py-1 font-bold"
               style={{
                 background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
                 color: '#000000',
+                fontSize:'10px',
                 boxShadow: '0 4px 16px rgba(57,255,20,0.4)',
               }}
             >
@@ -575,35 +565,34 @@ export default function ProductPage() {
 
         {/* ── Fixed title bar ── */}
         <div
-          className="fixed block left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-3 sm:py-4"
+          className="fixed block h-42 left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-2 sm:py-4"
           style={{ background: 'rgba(244,247,244,0.95)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(57,255,20,0.15)', boxShadow: '0 2px 20px rgba(0,0,0,0.06)' }}
         >
-          <div className="mx-auto max-w-5xl  flex items-center md:h-28 h-18 justify-center  gap-2">
-            <span className="relative flex h-1.5 w-1.5 shrink-0 mt-6">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: '#39FF14', animationDuration: '2s' }} />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: '#39FF14' }} />
-            </span>
+          <div className="mx-auto max-w-5xl  flex items-center md:h-28 pt-8 h-18 justify-center  gap-2">
+            
             <span
-              className="font-black text-center leading-snug text-xl mt-4 md:text-4xl"
+              className="font-black text-center   mt-4 md:text-4xl"
               style={{
-                fontFamily: 'var(--font-khmer), sans-serif',
+                 fontFamily: 'var(--font-khmer), sans-serif',
                 color: '#111',
-               
+                fontSize:'24px',
+                fontWeight:'98px'
+  
               }}
             >
-              តារា​តម្លៃ Social Media{' '}
+              តារា​តម្លៃ Social Media{' '} 
               <span style={{ background: 'linear-gradient(135deg, #1a7a05, #39FF14)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 ល្អៗ Build ថ្មីៗ
               </span>
             </span>
            
           </div>
-          <div className="relative mx-auto max-w-5xl flex items-center justify-center"
+          <div className="relative mx-auto pt-6 max-w-5xl flex items-center justify-center"
           style={{
             fontFamily:"ui-monospace"
           }}
           >
-            <p className="text-black">មានលក់កញ្ចប់សម្រាប់បងៗ ប្រកបអាជីវកម្មតម្លៃ នឹងគុណភាពល្អ</p>
+            <p className="text-black" style={{ fontSize:'14px'}}>មានលក់កញ្ចប់សម្រាប់បងៗ ប្រកបអាជីវកម្មតម្លៃ នឹងគុណភាពល្អ</p>
           </div>
         </div>
 
@@ -611,7 +600,7 @@ export default function ProductPage() {
         <div className="h-12 sm:h-14" />
 
         {/* ── Table Section ── */}
-        <section className="px-3 sm:px-6 pb-28 md:pt-48 pt-38 sm:pt-32">
+        <section className="px-3 sm:px-6 pb-28 md:pt-48 pt-52 sm:pt-32">
           <div className="mx-auto max-w-5xl">
             <div className="overflow-hidden rounded-3xl  " style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)' }}>
               <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #39FF14 0%, #2ee60f 40%, #7fff3a 70%, #39FF14 100%)' }} />
