@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Website Development",
+    "title_kh": "បង្កើត Website",
+    "description": "Landing pages, business sites, portfolios — pixel-perfect and fast.",
+    "tags": ["Next.js", "React", "Tailwind"],
+    "from_price": "$99",
+    "icon_type": "website",
+    "popular": false,
+    "is_active": true,
+    "sort_order": 1
+  },
+  {
+    "id": 2,
+    "title": "Mobile App",
+    "title_kh": "បង្កើត Mobile App",
+    "description": "Cross-platform apps for iOS & Android with smooth UX.",
+    "tags": ["React Native", "Flutter", "Expo"],
+    "from_price": "$199",
+    "icon_type": "mobile",
+    "popular": true,
+    "is_active": true,
+    "sort_order": 2
+  },
+  {
+    "id": 3,
+    "title": "Full-Stack System",
+    "title_kh": "ប្រព័ន្ធ Full-Stack",
+    "description": "End-to-end systems: admin panels, APIs, dashboards, auth.",
+    "tags": ["Laravel", "Node.js", "MySQL"],
+    "from_price": "$299",
+    "icon_type": "fullstack",
+    "popular": false,
+    "is_active": true,
+    "sort_order": 3
+  },
+  {
+    "id": 4,
+    "title": "UI/UX Design",
+    "title_kh": "រចនា UI/UX",
+    "description": "Beautiful, conversion-focused designs delivered in Figma.",
+    "tags": ["Figma", "Prototyping", "Design System"],
+    "from_price": "$59",
+    "icon_type": "uiux",
+    "popular": false,
+    "is_active": true,
+    "sort_order": 4
+  },
+  {
+    "id": 5,
+    "title": "E-Commerce Store",
+    "title_kh": "ហាង Online",
+    "description": "Online shops with payment, inventory, and order management.",
+    "tags": ["WooCommerce", "Stripe", "Next.js"],
+    "from_price": "$149",
+    "icon_type": "ecommerce",
+    "popular": false,
+    "is_active": true,
+    "sort_order": 5
+  },
+  {
+    "id": 6,
+    "title": "SEO & Performance",
+    "title_kh": "SEO & ល្បឿន",
+    "description": "Speed optimization, Core Web Vitals, and SEO audits.",
+    "tags": ["SEO", "Analytics", "Speed"],
+    "from_price": "$49",
+    "icon_type": "seo",
+    "popular": false,
+    "is_active": true,
+    "sort_order": 6
+  }
+]

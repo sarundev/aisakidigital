@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { fetchProducts, type ApiProduct } from '@/lib/api';
+import Subtitle from '@/components/Subtitle';
 
 const TELEGRAM_URL = 'https://t.me/T1_fakerrr';
 const FACEBOOK_URL = 'https://www.facebook.com/AisakiDigital';
@@ -314,7 +315,6 @@ function ProductRow({ product }: { product: ApiProduct }) {
   const [hovered, setHovered] = useState(false);
   const [modal, setModal] = useState(false);
 
-  const stockCount = (product.stock_quantity ?? 0) > 0 ? product.stock_quantity : null;
   const priceUnit = product.price_unit ?? product.tags[0] ?? 'per unit';
   const inStock = product.is_active;
   const isSocial = ['facebook', 'tiktok', 'instagram', 'telegram'].includes(product.category.toLowerCase());
@@ -341,68 +341,36 @@ function ProductRow({ product }: { product: ApiProduct }) {
         />
 
         {/* ── Mobile Card ── */}
-        <div className="flex sm:hidden flex-col gap-0 px-4 py-4">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 min-w-0">
-              <div
-                className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200"
-                style={{
-                  background: 'rgba(57,255,20,0.07)',
-                  border: '1px solid rgba(57,255,20,0.18)',
-                  color: '#1a7a05',
-                  cursor: isSocial ? 'pointer' : 'default',
-                }}
-                onClick={isSocial ? () => setModal(true) : undefined}
-              >
-                <CategoryIcon category={product.category} />
-                {product.is_featured && (
-                  <span
-                    className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full"
-                    style={{ background: 'linear-gradient(135deg, #39FF14, #2ee60f)', boxShadow: '0 2px 8px rgba(57,255,20,0.5)' }}
-                  >
-                    <svg width="8" height="8" viewBox="0 0 24 24" fill="#000">
-                      <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-                    </svg>
-                  </span>
-                )}
-              </div>
-              <div className="min-w-0">
-                <p className="truncate text-sm font-bold" style={{ color: '#111111' }}>{product.name}</p>
-                <p className="text-xs" style={{ color: '#999999' }}>{product.category}</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setModal(true)}
-              className="shrink-0 flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold tracking-wide"
+        <div className="flex sm:hidden flex-col gap-3 px-4 py-5">
+          {/* Row 1: Icon + Name + Stock badge */}
+          <div className="flex items-center gap-3">
+            <div
+              className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
               style={{
-                background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
-                color: '#000000',
-                boxShadow: '0 4px 14px rgba(57,255,20,0.35)',
-                border: '1px solid transparent',
+                background: 'linear-gradient(135deg, rgba(57,255,20,0.13) 0%, rgba(57,255,20,0.05) 100%)',
+                border: '1px solid rgba(57,255,20,0.25)',
+                color: '#1a7a05',
               }}
+              onClick={isSocial ? () => setModal(true) : undefined}
             >
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
-              Order
-            </button>
-          </div>
-
-          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 pl-1">
-            <div className="flex items-center gap-1.5">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#bbbbbb" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
-              </svg>
-              <span className="text-xs font-medium" style={{ color: '#666666' }}>{product.duration ?? product.category}</span>
+              <CategoryIcon category={product.category} />
+              {product.is_featured && (
+                <span
+                  className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full"
+                  style={{ background: 'linear-gradient(135deg, #39FF14, #2ee60f)', boxShadow: '0 2px 8px rgba(57,255,20,0.5)' }}
+                >
+                  <svg width="8" height="8" viewBox="0 0 24 24" fill="#000">
+                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                  </svg>
+                </span>
+              )}
             </div>
-            <div className="flex items-baseline gap-1">
-              <span className="text-base font-black" style={{ color: '#1a7a05' }}>{product.price}</span>
-              <span className="text-xs" style={{ color: '#aaaaaa' }}>{priceUnit}</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-extrabold truncate" style={{ color: '#111111' }}>{product.name}</p>
+              <p className="text-xs mt-0.5" style={{ color: '#999999' }}>{product.category}</p>
             </div>
             <span
-              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold"
+              className="shrink-0 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold"
               style={
                 inStock
                   ? { background: 'rgba(57,255,20,0.09)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.22)' }
@@ -417,17 +385,46 @@ function ProductRow({ product }: { product: ApiProduct }) {
               ) : (
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: '#ef4444' }} />
               )}
-              {inStock
-                ? stockCount ? `In Stock (${stockCount.toLocaleString()})` : 'In Stock'
-                : 'Out of Stock'}
+              {inStock ? 'In Stock' : 'Out'}
             </span>
+          </div>
+
+          {/* Row 2: Price + Duration + Order button */}
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-2xl font-black" style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>{product.price}</span>
+                <span className="text-xs" style={{ color: '#aaaaaa' }}>{priceUnit}</span>
+              </div>
+              <div className="mt-0.5 flex items-center gap-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#bbbbbb" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span className="text-xs font-medium" style={{ color: '#888888' }}>{product.duration ?? product.category}</span>
+              </div>
+            </div>
+            <button
+              onClick={() => setModal(true)}
+              className="shrink-0 flex items-center gap-1.5 rounded-2xl px-5 py-2.5 text-sm font-bold"
+              style={{
+                background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
+                color: '#000000',
+                boxShadow: '0 4px 16px rgba(57,255,20,0.4)',
+              }}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+              Order Now
+            </button>
           </div>
         </div>
 
         {/* ── Desktop Row ── */}
         <div
-          className="hidden sm:grid items-center gap-6 px-7 py-5"
-          style={{ gridTemplateColumns: '2.2fr 1fr 1.1fr 1.5fr auto' }}
+          className="hidden sm:grid items-center gap-6 px-7 py-5 grid-cols-3 "
         >
           {/* ── Mail Type ── */}
           <div className="flex items-center gap-4 min-w-0">
@@ -492,7 +489,7 @@ function ProductRow({ product }: { product: ApiProduct }) {
           </div>
 
           {/* ── Stock Status ── */}
-          <div className="flex flex-col gap-1.5">
+          {/* <div className="flex flex-col gap-1.5">
             <span
               className="inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
               style={
@@ -532,10 +529,8 @@ function ProductRow({ product }: { product: ApiProduct }) {
                 </span>
               </p>
             )}
-          </div>
-
+          </div> */}
           {/* ── Order Button ── */}
-          
         </div>
       </div>
 
@@ -562,215 +557,82 @@ export default function ProductPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen" style={{ background: '#fafafa' }}>
+      <main className="min-h-screen" style={{ background: '#f4f7f4' }}>
 
         {/* ── Hero ── */}
-        <section
-          className="relative overflow-hidden pt-32 pb-20 px-6"
-          style={{ background: 'linear-gradient(170deg, #ffffff 0%, #f5fff5 55%, #edfaed 100%)' }}
+        
+
+        {/* ── Fixed title bar ── */}
+        <div
+          className="fixed left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-3 sm:py-4"
+          style={{ background: 'rgba(244,247,244,0.95)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(57,255,20,0.15)', boxShadow: '0 2px 20px rgba(0,0,0,0.06)' }}
         >
-          {/* decorative dots */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              backgroundImage: 'radial-gradient(circle, rgba(57,255,20,0.08) 1px, transparent 1px)',
-              backgroundSize: '32px 32px',
-            }}
-          />
-          <div
-            className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(57,255,20,0.1) 0%, transparent 70%)', filter: 'blur(60px)' }}
-          />
-
-          <div className="relative mx-auto max-w-5xl text-center">
-            <div
-              className="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
+          <div className="mx-auto max-w-5xl flex items-center md:h-28 h-18 justify-center gap-2">
+            <span className="relative flex h-1.5 w-1.5 shrink-0 mt-6">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: '#39FF14', animationDuration: '2s' }} />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: '#39FF14' }} />
+            </span>
+            <span
+              className="font-black text-center leading-snug text-xl mt-4 md:text-4xl"
               style={{
-                background: 'rgba(57,255,20,0.08)',
-                border: '1px solid rgba(57,255,20,0.2)',
+                fontFamily: 'var(--font-khmer), sans-serif',
+                color: '#111',
+               
               }}
-            >
-              <span className="h-1.5 w-1.5 animate-ping rounded-full" style={{ background: '#39FF14', animationDuration: '2s' }} />
-              <span className="text-xs font-bold uppercase tracking-widest" style={{ color: '#1a7a05' }}>
-                Live Marketplace
-              </span>
-            </div>
-
-            <h1
-              className="font-black leading-tight mb-4"
-              
-              style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)',fontFamily: 'var(--font-khmer), sans-serif', color: '#111111', letterSpacing: '-0.025em' }}
             >
               តារា​តម្លៃ Social Media{' '}
-              <span
-                style={{
-                  background: 'linear-gradient(135deg, #1a7a05 0%, #39FF14 60%, #1a7a05 100%)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-               ល្អៗ Build ថ្មីៗ
+              <span style={{ background: 'linear-gradient(135deg, #1a7a05, #39FF14)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                ល្អៗ Build ថ្មីៗ
               </span>
-            </h1>
-            <p className="mx-auto max-w-md text-base leading-relaxed" style={{ color: '#666666' }}>
-              Verified email accounts — bulk-ready, fast delivery, competitive pricing.
-            </p>
-
-            {/* Stats */}
-            {/* <div className="mt-10 flex flex-wrap items-stretch justify-center gap-4">
-              {[
-                {
-                  icon: (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
-                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                    </svg>
-                  ),
-                  value: `${displayList.length || FALLBACK_PRODUCTS.length}`,
-                  label: 'Product Types',
-                },
-                {
-                  icon: (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  ),
-                  value: totalStock > 0 ? `${(totalStock / 1000).toFixed(0)}K+` : '60K+',
-                  label: 'Units in Stock',
-                },
-                {
-                  icon: (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                  ),
-                  value: '< 3h',
-                  label: 'Avg. Delivery',
-                },
-              ].map((s) => (
-                <div
-                  key={s.label}
-                  className="flex items-center gap-3 rounded-2xl px-5 py-4 shrink-0"
-                  style={{
-                    background: 'rgba(255,255,255,0.8)',
-                    border: '1px solid rgba(57,255,20,0.15)',
-                    backdropFilter: 'blur(12px)',
-                    boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
-                  }}
-                >
-                  <div
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                    style={{ background: 'rgba(57,255,20,0.1)', color: '#1a7a05' }}
-                  >
-                    {s.icon}
-                  </div>
-                  <div className="text-left">
-                    <div className="text-xl font-black leading-none" style={{ color: '#111111' }}>{s.value}</div>
-                    <div className="mt-0.5 text-xs" style={{ color: '#888888' }}>{s.label}</div>
-                  </div>
-                </div>
-              ))}
-            </div> */}
+            </span>
           </div>
-        </section>
+        </div>
+
+        {/* Spacer for fixed title bar */}
+        <div className="h-12 sm:h-14" />
 
         {/* ── Table Section ── */}
-        <section className="px-3 pb-28 pt-10 sm:px-6">
-          <div className="mx-auto max-w-5xl">
+        <section className="px-3 sm:px-6 pb-28 md:pt-48 pt-32 sm:pt-32">
+          <div className="mx-auto max-w-7xl">
+            <div className="overflow-hidden rounded-3xl  " style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)' }}>
+              <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #39FF14 0%, #2ee60f 40%, #7fff3a 70%, #39FF14 100%)' }} />
 
-            {/* Table card */}
-            <div
-              className="overflow-hidden rounded-2xl"
-              style={{
-                background: '#ffffff',
-                border: '1px solid rgba(0,0,0,0.07)',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04)',
-              }}
-            >
-              {/* Top green accent stripe */}
-              <div
-                className="h-0.5 w-full"
-                style={{ background: 'linear-gradient(90deg, transparent 0%, #39FF14 40%, #2ee60f 60%, transparent 100%)' }}
-              />
-
-              {/* Mobile header label */}
-              <div
-                className="flex sm:hidden items-center justify-between px-4 py-2.5"
-                style={{
-                  background: 'linear-gradient(180deg, rgba(57,255,20,0.04) 0%, rgba(57,255,20,0.01) 100%)',
-                  borderBottom: '1px solid rgba(57,255,20,0.1)',
-                }}
-              >
-                <span className="text-[10px] font-extrabold tracking-widest" style={{ color: '#aaaaaa', letterSpacing: '0.12em' }}>
-                  PRODUCTS
-                </span>
-                <span className="text-[10px] font-extrabold tracking-widest" style={{ color: '#aaaaaa', letterSpacing: '0.12em' }}>
-                  ACTION
-                </span>
+              <div className="flex sm:hidden items-center justify-between px-4 py-3" style={{ background: 'linear-gradient(180deg, rgba(57,255,20,0.05) 0%, transparent 100%)', borderBottom: '1px solid rgba(57,255,20,0.1)' }}>
+                <span className="text-[10px] font-extrabold tracking-widest" style={{ color: '#aaa', letterSpacing: '0.14em' }}>PRODUCTS</span>
+                <span className="text-[10px] font-extrabold tracking-widest" style={{ color: '#aaa', letterSpacing: '0.14em' }}>ACTION</span>
               </div>
 
-              {/* Header */}
-              <div
-                className="hidden sm:grid items-center gap-6 px-7 py-3.5"
-                style={{
-                  gridTemplateColumns: '2.2fr 1fr 1.1fr 1.5fr auto',
-                  background: 'linear-gradient(180deg, rgba(57,255,20,0.04) 0%, rgba(57,255,20,0.01) 100%)',
-                  borderBottom: '1px solid rgba(57,255,20,0.1)',
-                }}
-              >
-                {['PRODUCT TYPE', ' WARRANTY', 'PRICE', 'STOCK STATUS', ''].map((label, i) => (
-                  <div key={i} className="flex items-center">
-                    {label && (
-                      <span
-                        className="text-[15px] text-black font-extrabold tracking-widest whitespace-nowrap"
-                        style={{  letterSpacing: '0.12em' }}
-                      >
-                        {label}
-                      </span>
-                    )}
+              <div className="hidden sm:grid grid-cols-3 items-center gap-6 px-7 py-4" style={{ background: 'linear-gradient(180deg, rgba(57,255,20,0.05) 0%, transparent 100%)', borderBottom: '1px solid rgba(57,255,20,0.1)' }}>
+                {['PRODUCT TYPE', 'WARRANTY', 'PRICE'].map((label) => (
+                  <div key={label}>
+                    <span className="text-[14px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.14em' }}>{label}</span>
                   </div>
                 ))}
               </div>
 
-              {/* Rows */}
               {loading ? (
                 Array.from({ length: 4 }).map((_, i) => <SkeletonRow key={i} />)
               ) : displayList.length === 0 ? (
                 <div className="py-24 text-center">
-                  <div
-                    className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl"
-                    style={{ background: 'rgba(57,255,20,0.07)', border: '1px solid rgba(57,255,20,0.15)' }}
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#39FF14" strokeWidth="1.5">
-                      <circle cx="11" cy="11" r="8" />
-                      <path d="m21 21-4.35-4.35" />
-                    </svg>
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl" style={{ background: 'rgba(57,255,20,0.07)', border: '1px solid rgba(57,255,20,0.15)' }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#39FF14" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                   </div>
-                  <p className="text-sm font-medium" style={{ color: '#aaaaaa' }}>No products in this category.</p>
+                  <p className="text-sm font-medium" style={{ color: '#aaaaaa' }}>No products found.</p>
                 </div>
               ) : (
                 displayList.map((product) => (
                   <ProductRow key={product.id} product={product} />
                 ))
               )}
-            </div>
 
-            {/* Footer note */}
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-4">
-              {[
-                { icon: '•', text: 'Prices per unit' },
-                { icon: '•', text: 'Real-time stock' },
-                { icon: '•', text: 'Bulk discounts available' },
-              ].map((item) => (
-                <span key={item.text} className="flex items-center gap-1.5 text-xs" style={{ color: '#bbbbbb' }}>
-                  <span style={{ color: '#39FF14' }}>{item.icon}</span>
-                  {item.text}
-                </span>
-              ))}
+              <div className="px-6 py-4 flex flex-wrap items-center justify-center gap-5" style={{ borderTop: '1px solid rgba(0,0,0,0.04)', background: 'rgba(57,255,20,0.02)' }}>
+                {['Prices per unit', 'Real-time stock', 'Bulk discounts available'].map((text) => (
+                  <span key={text} className="flex items-center gap-1.5 text-xs" style={{ color: '#bbb' }}>
+                    <span style={{ color: '#39FF14', fontSize: 10 }}>●</span>{text}
+                  </span>
+                ))}
+              </div>
             </div>
-
           </div>
         </section>
 
