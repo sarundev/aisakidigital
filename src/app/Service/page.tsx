@@ -233,7 +233,7 @@ function CategoryIcon({ category }: { category: string }) {
   const cat = (category ?? '').trim().toLowerCase();
 
   if (cat === 'facebook') return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
       <circle cx="12" cy="12" r="12" fill="#1877F2" />
       <path d="M15.5 8H13.5C13.2 8 13 8.2 13 8.5V10H15.5L15.2 12.5H13V19H10.5V12.5H9V10H10.5V8.5C10.5 6.6 11.6 5.5 13.5 5.5H15.5V8Z" fill="white" />
     </svg>
@@ -343,10 +343,10 @@ function ProductCard({ product }: { product: Project }) {
         />
 
         {/* Card body */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 h-38">
 
           {/* ── Mobile compact row ── */}
-          <div className="flex sm:hidden items-center gap-3 px-3 py-3.5">
+          <div className="flex sm:hidden items-center gap-3 px-3 py-3.5 -mt-8 ">
             {/* Icon */}
             <div
               className="shrink-0 relative flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-300"
@@ -373,8 +373,8 @@ function ProductCard({ product }: { product: Project }) {
 
             {/* Info */}
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-1.5 mb-1">
-                <h3 className="text-sm font-extrabold truncate" style={{ color: '#111111' }}>{product.project_name}</h3>
+              <div className="flex items-center gap-1.5 mb-1 mt-4">
+                <h3 className="text-lg font-extrabold truncate" style={{ color: '#111111' }}>{product.project_name}</h3>
                 {product.project_project?.trim() && (
                   <span
                     className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider"
@@ -386,7 +386,7 @@ function ProductCard({ product }: { product: Project }) {
               </div>
               <div className="flex flex-wrap items-center gap-1.5">
                 {product.project_warranty && (
-                  <span className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px] font-medium" style={{ background: '#f7f7f7', color: '#888', border: '1px solid #efefef' }}>
+                  <span className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[15px] font-medium" style={{ background: '#f7f7f7', border: '1px solid #efefef' }}>
                     <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#bbb" strokeWidth="2">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </svg>
@@ -402,26 +402,28 @@ function ProductCard({ product }: { product: Project }) {
             </div>
 
             {/* Price + Order button */}
-            <div className="shrink-0 flex flex-col items-end gap-1.5">
-              <span className="text-lg font-black leading-none" style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>
+            <div className="relative pt-12">
+            <div className="shrink-0 flex flex-col items-end gap-1.5 ">
+              <span className="text-2xl font-black leading-none mt-4"  style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>
                 {product.project_price ?? '—'}
               </span>
               <button
                 onClick={() => setModal(true)}
-                className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-bold transition-all duration-200"
+                className="flex items-center gap-1 mt-6 text-md rounded-lg px-3 py-1.5  font-bold transition-all duration-200"
                 style={{
                   background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
                   color: '#000000',
                   boxShadow: '0 2px 8px rgba(57,255,20,0.35)',
                 }}
               >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 0 1-8 0" />
                 </svg>
                 Order
               </button>
+            </div>
             </div>
           </div>
 
@@ -548,7 +550,7 @@ export default function ProductPage() {
 
         {/* ── Fixed title bar ── */}
         <div
-          className="fixed left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-3 sm:py-4"
+          className="fixed block left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-3 sm:py-4"
           style={{ background: 'rgba(244,247,244,0.95)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(57,255,20,0.15)', boxShadow: '0 2px 20px rgba(0,0,0,0.06)' }}
         >
           <div className="mx-auto max-w-5xl flex items-center md:h-28 h-18 justify-center gap-2">
@@ -569,6 +571,13 @@ export default function ProductPage() {
                 ល្អៗ Build ថ្មីៗ
               </span>
             </span>
+          </div>
+          <div className="relative mx-auto max-w-5xl flex items-center justify-center">
+            <p className="text-gray-800"
+             style={{
+            fontFamily:"ui-monospace"
+              }}
+          >មានសេវាកម្មល្អៗប្រចាំខែ សម្រាប់បងៗអាជីវកម្មគ្រប់ប្រភេទ</p>
           </div>
         </div>
 

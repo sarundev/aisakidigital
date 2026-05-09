@@ -356,7 +356,7 @@ export default function Navbar() {
                       style={{
                         color: activeLink === link.href ? '#39FF14' : 'rgba(235,235,235,0.8)',
                         fontSize: '1.85rem',
-                        fontFamily: 'Times New Roman, serif',
+                       fontFamily:"monospace",
                         fontWeight: 400,
                         letterSpacing: '0.02em',
                         lineHeight: 1.15,
