@@ -354,12 +354,12 @@ function ProductRow({ product }: { product: ApiProduct }) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5 mb-0.5">
               <CategoryIcon category={product.category} />
-              <p className="text-[8px] font-bold truncate" style={{ color: '#111' }}>{product.name}</p>
+              <p className="text-[11px] font-bold truncate" style={{ color: '#111' }}>{product.name}</p>
               {/* {product.is_featured && (
                 <span className="shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ background: 'rgba(57,255,20,0.1)', color: '#1a7a05' }}>★</span>
               )} */}
             </div>
-            <p className="text-[11px] hidden" style={{ color: '#999' }}>{product.category}</p>
+            <p className="text-[10px] hidden" style={{ color: '#999' }}>{product.category}</p>
             
            
           </div>
@@ -370,7 +370,7 @@ function ProductRow({ product }: { product: ApiProduct }) {
               </span>
             </div>
           <div className="relative flex items-center justify-center ">
-            <span className="text-[10px] font-black leading-none" style={{ color: '#1a7a05' }}>
+            <span className="text-[11px] font-black leading-none" style={{ color: '#1a7a05' }}>
               {product.price}
             </span>
           </div>
@@ -380,7 +380,7 @@ function ProductRow({ product }: { product: ApiProduct }) {
           
             <button
               onClick={() => setModal(true)}
-              className="flex items-center gap-1 rounded-xl px-3 py-1.5 text-[8px] font-bold"
+              className="flex items-center gap-1 rounded-xl px-3 py-1.5 text-[11px] font-bold"
               style={{ background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)', color: '#000', boxShadow: '0 3px 10px rgba(57,255,20,0.35)' }}
             >
               Order
@@ -519,7 +519,7 @@ export default function ProductPage() {
           <div className="mx-auto max-w-5xl  flex items-center md:h-28 pt-8 h-18 justify-center  gap-2">
             
             <span
-              className="font-black text-center text-[23px] md:text-[32px]  mt-4 md:text-4xl"
+              className="font-black text-center text-[23px] sm:text-[22px] md:text-[32px]  mt-4 md:text-4xl"
               style={{
                  fontFamily: 'var(--font-khmer), sans-serif',
                 color: '#111',
@@ -554,11 +554,11 @@ export default function ProductPage() {
 
               {/* Mobile header */}
               <div className="flex sm:hidden items-center justify-between px-4 py-3" style={{ background: 'linear-gradient(180deg, rgba(57,255,20,0.05) 0%, transparent 100%)', borderBottom: '1px solid rgba(57,255,20,0.1)' }}>
-                <span className="text-[10px] font-extrabold tracking-widest" style={{ color: '#aaa', letterSpacing: '0.14em' }}>PRODUCT</span>
-                <span className="text-[10px] font-extrabold tracking-widest" style={{ color: '#aaa', letterSpacing: '0.14em' }}> STOCK</span>
-                <span className="text-[10px] font-extrabold tracking-widest" style={{ color: '#aaa', letterSpacing: '0.14em' }}> PRICE</span>
+                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.14em' }}>PRODUCT</span>
+                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.14em' }}> STOCK</span>
+                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.14em' }}> PRICE</span>
    
-                <span className="text-[10px] font-extrabold tracking-widest" style={{ color: '#aaa', letterSpacing: '0.14em' }}>ACTION</span>
+                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{ letterSpacing: '0.14em' }}>ACTION</span>
               </div>
 
               {/* Desktop header — 4 cols matching the row grid */}
