@@ -519,7 +519,7 @@ export default function ProductPage() {
           <div className="mx-auto max-w-5xl  flex items-center md:h-28 pt-8 h-18 justify-center  gap-2">
             
             <span
-              className="font-black text-center text-[24px] md:text-[32px]  mt-4 md:text-4xl"
+              className="font-black text-center text-[23px] md:text-[32px]  mt-4 md:text-4xl"
               style={{
                  fontFamily: 'var(--font-khmer), sans-serif',
                 color: '#111',
