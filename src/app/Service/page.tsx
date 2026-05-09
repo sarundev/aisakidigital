@@ -204,25 +204,24 @@ function ContactModal({ product, onClose }: { product: Project; onClose: () => v
 
 function SkeletonCard() {
   return (
-    <div className="animate-pulse flex overflow-hidden rounded-2xl" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.06)' }}>
-      <div className="w-1 shrink-0" style={{ background: '#ebebeb' }} />
-      <div className="flex flex-1 flex-wrap sm:flex-nowrap items-center gap-4 px-5 py-5">
-        <div className="shrink-0 h-14 w-14 rounded-2xl" style={{ background: '#ebebeb' }} />
-        <div className="flex-1 min-w-0">
-          <div className="mb-2.5 h-4 w-36 rounded-md" style={{ background: '#ebebeb' }} />
-          <div className="flex gap-2">
-            <div className="h-5 w-16 rounded-full" style={{ background: '#f3f3f3' }} />
-            <div className="h-5 w-28 rounded-full" style={{ background: '#f3f3f3' }} />
-          </div>
+    <div
+      className="animate-pulse flex items-center gap-4 rounded-2xl px-5 py-4"
+      style={{ background: '#ffffff', border: '1px solid #eaecef' }}
+    >
+      <div className="shrink-0 h-12 w-12 rounded-xl" style={{ background: '#efefef' }} />
+      <div className="flex-1 min-w-0">
+        <div className="mb-2 h-4 w-40 rounded-md" style={{ background: '#efefef' }} />
+        <div className="flex gap-2">
+          <div className="h-3.5 w-16 rounded-md" style={{ background: '#f5f5f5' }} />
+          <div className="h-3.5 w-24 rounded-md" style={{ background: '#f5f5f5' }} />
         </div>
-        <div className="hidden sm:block shrink-0 w-px h-10" style={{ background: '#f0f0f0' }} />
-        <div className="hidden sm:block shrink-0 text-right">
-          <div className="mb-1.5 h-3 w-10 rounded-md ml-auto" style={{ background: '#f3f3f3' }} />
-          <div className="h-7 w-20 rounded-md ml-auto" style={{ background: '#ebebeb' }} />
-          <div className="mt-1 h-3 w-14 rounded-md ml-auto" style={{ background: '#f3f3f3' }} />
-        </div>
-        <div className="shrink-0 h-10 w-28 rounded-xl" style={{ background: '#ebebeb' }} />
       </div>
+      <div className="hidden sm:flex flex-col items-end gap-1.5 shrink-0">
+        <div className="h-3 w-8 rounded-md" style={{ background: '#f5f5f5' }} />
+        <div className="h-7 w-20 rounded-md" style={{ background: '#efefef' }} />
+      </div>
+      <div className="shrink-0 w-px h-8 hidden sm:block" style={{ background: '#eaecef' }} />
+      <div className="shrink-0 h-9 w-28 rounded-xl" style={{ background: '#efefef' }} />
     </div>
   );
 }
@@ -315,204 +314,110 @@ function ProductCard({ product }: { product: Project }) {
   const [modal, setModal] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-  const priceUnit = product.project_warranty ?? '';
-
-
   return (
     <>
       <div
-        className="group relative flex overflow-hidden rounded-2xl transition-all duration-300"
+        className="flex items-center gap-4 rounded-2xl px-5 py-4 transition-all duration-200"
         style={{
           background: '#ffffff',
-          border: `1px solid ${hovered ? 'rgba(57,255,20,0.25)' : 'rgba(0,0,0,0.07)'}`,
+          border: `1px solid ${hovered ? 'rgba(57,255,20,0.4)' : '#eaecef'}`,
           boxShadow: hovered
-            ? '0 8px 32px rgba(57,255,20,0.1), 0 2px 8px rgba(0,0,0,0.06)'
-            : '0 1px 8px rgba(0,0,0,0.05)',
+            ? '0 8px 28px rgba(0,0,0,0.08), 0 2px 8px rgba(57,255,20,0.1)'
+            : '0 1px 4px rgba(0,0,0,0.04)',
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {/* Left accent strip */}
+        {/* Platform icon */}
         <div
-          className="w-1 shrink-0 transition-all duration-300"
+          className="shrink-0 relative flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-200"
+          style={{
+            background: hovered ? 'rgba(57,255,20,0.07)' : '#f4f5f7',
+            border: `1px solid ${hovered ? 'rgba(57,255,20,0.25)' : '#e8eaed'}`,
+          }}
+        >
+          <CategoryIcon category={product.project_project ?? ''} />
+          {product.is_featured && (
+            <span
+              className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full"
+              style={{ background: '#39FF14', boxShadow: '0 2px 8px rgba(57,255,20,0.6)' }}
+            >
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="#000">
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+              </svg>
+            </span>
+          )}
+        </div>
+
+        {/* Info */}
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <h3 className="text-[20px] text-nowrap  font-bold tracking-tight" style={{ color: '#0d0d0d' }}>
+              {product.project_name}
+            </h3>
+            {product.project_project?.trim() && (
+              <span
+                className="rounded-md px-2 bg-green-500 text-white py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                
+              >
+                {product.project_project.trim()}
+              </span>
+            )}
+            {product.is_featured && (
+              <span
+                className="rounded-md px-2 py-0.5 text-[10px] font-semibold"
+                style={{ background: 'rgba(57,255,20,0.08)', color: '#1a7a05' }}
+              >
+                ★ Featured
+              </span>
+            )}
+          </div>
+          {product.project_warranty && (
+            <div className="flex items-center gap-1 text-green-800" >
+            
+              <span className="text-md">warranty <br /> {product.project_warranty} </span>
+            </div>
+          )}
+        </div>
+
+        {/* Price — hidden on very small screens */}
+        <div className="shrink-0 text-right hidden sm:block">
+          <p className="text-[9px] font-semibold uppercase tracking-widest mb-0.5" style={{ color: '#c4c8d0' }}>Price</p>
+          <p className="text-2xl font-black leading-none" style={{ color: '#1a7a05', letterSpacing: '-0.03em' }}>
+            {product.project_price ?? '—'}
+          </p>
+        </div>
+
+        {/* Price inline on mobile */}
+       
+
+        {/* Divider */}
+        <div className="hidden sm:block w-px h-9 shrink-0" style={{ background: '#eaecef' }} />
+        <div className="relative">
+
+        
+        <p className="sm:hidden ml-2 p-2 shrink-0 text-[25px] font-black leading-none" style={{ color: '#1a7a05', letterSpacing: '-0.03em' }}>
+          {product.project_price ?? '—'}
+        </p>
+        {/* CTA */}
+        <button
+          onClick={() => setModal(true)}
+          className="shrink-0 flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition-all duration-200"
           style={{
             background: hovered
-              ? 'linear-gradient(180deg, #39FF14 0%, #2ee60f 100%)'
-              : 'linear-gradient(180deg, rgba(57,255,20,0.3) 0%, rgba(57,255,20,0.15) 100%)',
+              ? 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)'
+              : 'rgba(57,255,20,0.1)',
+            color: hovered ? '#000' : '#1a7a05',
+            boxShadow: hovered ? '0 4px 18px rgba(57,255,20,0.45)' : 'none',
+            transform: hovered ? 'translateY(-1px)' : 'translateY(0)',
           }}
-        />
-
-        {/* Card body */}
-        <div className="flex-1 min-w-0 h-38">
-
-          {/* ── Mobile compact row ── */}
-          <div className="flex sm:hidden items-center gap-3 px-3 py-3.5 -mt-8 ">
-            {/* Icon */}
-            <div
-              className="shrink-0 relative flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-300"
-              style={{
-                background: hovered
-                  ? 'linear-gradient(135deg, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0.08) 100%)'
-                  : 'linear-gradient(135deg, rgba(57,255,20,0.09) 0%, rgba(57,255,20,0.04) 100%)',
-                border: `1px solid ${hovered ? 'rgba(57,255,20,0.4)' : 'rgba(57,255,20,0.18)'}`,
-                color: '#1a7a05',
-              }}
-            >
-              <CategoryIcon category={product.project_project ?? ''} />
-              {product.is_featured && (
-                <span
-                  className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full"
-                  style={{ background: 'linear-gradient(135deg, #39FF14, #2ee60f)', boxShadow: '0 2px 6px rgba(57,255,20,0.5)' }}
-                >
-                  <svg width="7" height="7" viewBox="0 0 24 24" fill="#000">
-                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-                  </svg>
-                </span>
-              )}
-            </div>
-
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-1.5 mb-1 mt-4">
-                <h3 className="text-lg font-extrabold truncate" style={{ color: '#111111' }}>{product.project_name}</h3>
-                {product.project_project?.trim() && (
-                  <span
-                    className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider"
-                    style={{ background: 'rgba(57,255,20,0.08)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.2)' }}
-                  >
-                    {product.project_project.trim()}
-                  </span>
-                )}
-              </div>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {product.project_warranty && (
-                  <span className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[15px] font-medium" style={{ background: '#f7f7f7', border: '1px solid #efefef' }}>
-                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#bbb" strokeWidth="2">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                    {product.project_warranty}
-                  </span>
-                )}
-                {product.is_featured && (
-                  <span className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: 'rgba(57,255,20,0.07)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.18)' }}>
-                    ⭐ Featured
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Price + Order button */}
-            <div className="relative pt-12">
-            <div className="shrink-0 flex flex-col items-end gap-1.5 ">
-              <span className="text-2xl font-black leading-none mt-4"  style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>
-                {product.project_price ?? '—'}
-              </span>
-              <button
-                onClick={() => setModal(true)}
-                className="flex items-center gap-1 mt-6 text-md rounded-lg px-3 py-1.5  font-bold transition-all duration-200"
-                style={{
-                  background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
-                  color: '#000000',
-                  boxShadow: '0 2px 8px rgba(57,255,20,0.35)',
-                }}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                  <line x1="3" y1="6" x2="21" y2="6" />
-                  <path d="M16 10a4 4 0 0 1-8 0" />
-                </svg>
-                Order
-              </button>
-            </div>
-            </div>
-          </div>
-
-          {/* ── Desktop row ── */}
-          <div className="hidden sm:flex items-center gap-4 px-6 py-5">
-            {/* Icon */}
-            <div
-              className="shrink-0 relative flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300"
-              style={{
-                background: hovered
-                  ? 'linear-gradient(135deg, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0.08) 100%)'
-                  : 'linear-gradient(135deg, rgba(57,255,20,0.09) 0%, rgba(57,255,20,0.04) 100%)',
-                border: `1px solid ${hovered ? 'rgba(57,255,20,0.4)' : 'rgba(57,255,20,0.18)'}`,
-                color: '#1a7a05',
-              }}
-            >
-              <CategoryIcon category={product.project_project ?? ''} />
-              {product.is_featured && (
-                <span
-                  className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full"
-                  style={{ background: 'linear-gradient(135deg, #39FF14, #2ee60f)', boxShadow: '0 2px 8px rgba(57,255,20,0.5)' }}
-                >
-                  <svg width="9" height="9" viewBox="0 0 24 24" fill="#000">
-                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-                  </svg>
-                </span>
-              )}
-            </div>
-
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <div className="flex flex-wrap items-center gap-2 mb-2">
-                <h3 className="text-sm font-extrabold tracking-tight" style={{ color: '#111111' }}>{product.project_name}</h3>
-                {product.project_project?.trim() && (
-                  <span
-                    className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider"
-                    style={{ background: 'rgba(57,255,20,0.08)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.2)' }}
-                  >
-                    {product.project_project.trim()}
-                  </span>
-                )}
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                {product.project_warranty && (
-                  <span className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-medium" style={{ background: '#f7f7f7', color: '#888', border: '1px solid #efefef' }}>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#bbb" strokeWidth="2">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                    {product.project_warranty}
-                  </span>
-                )}
-                {product.is_featured && (
-                  <span className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-semibold" style={{ background: 'rgba(57,255,20,0.07)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.18)' }}>
-                    ⭐ Featured
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div className="shrink-0 w-px h-12 mx-1" style={{ background: 'rgba(0,0,0,0.06)' }} />
-
-            {/* Price */}
-            <div className="shrink-0 text-right min-w-22.5">
-              <p className="text-[9px] font-bold uppercase tracking-widest mb-0.5" style={{ color: '#ccc' }}>Price</p>
-              <p className="text-2xl font-black leading-none" style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>{product.project_price ?? '—'}</p>
-              {priceUnit && <p className="text-[10px] mt-0.5" style={{ color: '#bbb' }}>{priceUnit}</p>}
-            </div>
-
-            {/* Order CTA */}
-            <button
-              onClick={() => setModal(true)}
-              className="shrink-0 flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-200"
-              style={{
-                background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
-                color: '#000000',
-                boxShadow: hovered ? '0 6px 20px rgba(57,255,20,0.5)' : '0 3px 12px rgba(57,255,20,0.3)',
-                transform: hovered ? 'scale(1.03)' : 'scale(1)',
-              }}
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
-              Order Now
-            </button>
-          </div>
-
+        >
+          <span className="hidden sm:inline">SUBCRIBE</span>
+          <span className="sm:hidden text-lg">SUBCRIBE</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
         </div>
       </div>
 
@@ -543,69 +448,72 @@ export default function ProductPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen" style={{ background: '#f4f7f4' }}>
+      <main className="min-h-screen" style={{ background: '#f7f8fa' }}>
 
-        {/* ── Hero ── */}
-        
-
-        {/* ── Fixed title bar ── */}
+        {/* ── Fixed header bar ── */}
         <div
-          className="fixed block left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-3 sm:py-4"
-          style={{ background: 'rgba(244,247,244,0.95)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(57,255,20,0.15)', boxShadow: '0 2px 20px rgba(0,0,0,0.06)' }}
+          className="fixed left-0 right-0 pt-4 h-36 top-16.5 z-30"
+          style={{
+            background: 'rgba(247,248,250,0.92)',
+            backdropFilter: 'blur(20px)',
+            borderBottom: '1px solid #eaecef',
+            boxShadow: '0 1px 0 rgba(0,0,0,0.04)',
+          }}
         >
-          <div className="mx-auto max-w-5xl flex items-center md:h-28 h-18 justify-center gap-2">
-            <span className="relative flex h-1.5 w-1.5 shrink-0 mt-6">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: '#39FF14', animationDuration: '2s' }} />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: '#39FF14' }} />
-            </span>
-            <span
-              className="font-black text-center leading-snug text-xl mt-4 md:text-4xl"
-              style={{
-                fontFamily: 'var(--font-khmer), sans-serif',
-                color: '#111',
-               
-              }}
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 py-5 sm:py-7 text-center">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <span className="relative flex h-1.5 w-1.5 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: '#39FF14', animationDuration: '2.5s' }} />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: '#39FF14' }} />
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: '#9aa0ac' }}>
+                Asaki Digital — Services
+              </span>
+            </div>
+            <h1
+              className="text-2xl sm:text-3xl md:text-4xl font-black leading-tight tracking-tight"
+              style={{ fontFamily: 'var(--font-khmer), sans-serif', color: '#0d0d0d' }}
             >
               តារា​តម្លៃ Social Media{' '}
-              <span style={{ background: 'linear-gradient(135deg, #1a7a05, #39FF14)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              <span style={{ background: 'linear-gradient(135deg, #1a7a05 0%, #39FF14 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                 ល្អៗ Build ថ្មីៗ
               </span>
-            </span>
-          </div>
-          <div className="relative mx-auto max-w-5xl flex items-center justify-center">
-            <p className="text-gray-800"
-             style={{
-            fontFamily:"ui-monospace"
-              }}
-          >មានសេវាកម្មល្អៗប្រចាំខែ សម្រាប់បងៗអាជីវកម្មគ្រប់ប្រភេទ</p>
+            </h1>
+            <p className="mt-1 text-sm" style={{ color: '#9aa0ac', fontFamily: 'var(--font-khmer), sans-serif' }}>
+              មានសេវាកម្មល្អៗប្រចាំខែ សម្រាប់បងៗអាជីវកម្មគ្រប់ប្រភេទ
+            </p>
           </div>
         </div>
 
-        {/* Spacer for fixed title bar */}
-        <div className="h-12 sm:h-14" />
-
         {/* ── Cards Section ── */}
-        <section className="px-3 sm:px-6 pb-28 md:pt-48 pt-32 sm:pt-32">
-          <div className="mx-auto max-w-7xl">
+        <section className="px-4 sm:px-6 pb-28 pt-58 sm:pt-56 md:pt-64">
+          <div className="mx-auto max-w-4xl">
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              <div className="flex flex-col gap-3 ">
                 {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
               </div>
             ) : displayList.length === 0 ? (
-              <div className="py-24 text-center rounded-3xl" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.06)' }}>
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl" style={{ background: 'rgba(57,255,20,0.07)', border: '1px solid rgba(57,255,20,0.15)' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#39FF14" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <div
+                className="py-24 text-center rounded-2xl"
+                style={{ background: '#ffffff', border: '1px solid #eaecef' }}
+              >
+                <div
+                  className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl"
+                  style={{ background: 'rgba(57,255,20,0.06)', border: '1px solid rgba(57,255,20,0.12)' }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#39FF14" strokeWidth="1.5">
+                    <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+                  </svg>
                 </div>
-                <p className="text-sm font-medium" style={{ color: '#aaaaaa' }}>No products found.</p>
+                <p className="text-sm font-medium" style={{ color: '#c4c8d0' }}>No services found.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-5">
+              <div className="flex flex-col gap-3">
                 {displayList.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             )}
-
           </div>
         </section>
 
