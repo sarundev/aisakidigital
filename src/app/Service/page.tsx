@@ -20,12 +20,15 @@ const FACEBOOK_URL = 'https://www.facebook.com/AisakiDigital';
 
 function ContactModal({ product, onClose }: { product: Project; onClose: () => void }) {
   const [customerTelegram, setCustomerTelegram] = useState('');
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
+    const t = setTimeout(() => setShow(true), 10);
     document.body.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', onKey);
     return () => {
+      clearTimeout(t);
       document.body.style.overflow = '';
       document.removeEventListener('keydown', onKey);
     };
@@ -33,22 +36,33 @@ function ContactModal({ product, onClose }: { product: Project; onClose: () => v
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)' }}
+      className="fixed inset-0 z-50 flex flex-col justify-end sm:flex-row sm:items-center sm:justify-center p-0 sm:p-4"
+      style={{
+        background: show ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0)',
+        backdropFilter: 'blur(10px)',
+        transition: 'background 0.3s ease',
+      }}
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-sm rounded-3xl p-8"
+        className="relative w-full sm:max-w-sm rounded-t-3xl sm:rounded-3xl p-6 sm:p-8"
         style={{
           background: '#ffffff',
           border: '1px solid rgba(57,255,20,0.18)',
-          boxShadow: '0 32px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(57,255,20,0.05), inset 0 1px 0 rgba(255,255,255,0.9)',
+          boxShadow: '0 -8px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(57,255,20,0.05), inset 0 1px 0 rgba(255,255,255,0.9)',
+          transform: show ? 'translateY(0)' : 'translateY(100%)',
+          transition: 'transform 0.35s cubic-bezier(0.32,0.72,0,1)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top green accent line */}
+        {/* Drag handle — mobile only */}
+        <div className="flex justify-center mb-5 sm:hidden">
+          <div className="w-10 h-1 rounded-full" style={{ background: '#e0e0e0' }} />
+        </div>
+
+        {/* Top green accent line — desktop only */}
         <div
-          className="absolute top-0 left-8 right-8 h-0.5 rounded-full"
+          className="hidden sm:block absolute top-0 left-8 right-8 h-0.5 rounded-full"
           style={{ background: 'linear-gradient(90deg, transparent, #39FF14, transparent)' }}
         />
 
@@ -329,104 +343,174 @@ function ProductCard({ product }: { product: Project }) {
         />
 
         {/* Card body */}
-        <div className="flex flex-1 flex-wrap sm:flex-nowrap items-center gap-4 px-4 sm:px-6 py-4 sm:py-5">
+        <div className="flex-1 min-w-0">
 
-          {/* Icon */}
-          <div
-            className="shrink-0 relative flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300"
-            style={{
-              background: hovered
-                ? 'linear-gradient(135deg, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0.08) 100%)'
-                : 'linear-gradient(135deg, rgba(57,255,20,0.09) 0%, rgba(57,255,20,0.04) 100%)',
-              border: `1px solid ${hovered ? 'rgba(57,255,20,0.4)' : 'rgba(57,255,20,0.18)'}`,
-              color: '#1a7a05',
-            }}
-          >
-            <CategoryIcon category={product.project_project ?? ''} />
-            {product.is_featured && (
-              <span
-                className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full"
-                style={{ background: 'linear-gradient(135deg, #39FF14, #2ee60f)', boxShadow: '0 2px 8px rgba(57,255,20,0.5)' }}
-              >
-                <svg width="9" height="9" viewBox="0 0 24 24" fill="#000">
-                  <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
-                </svg>
-              </span>
-            )}
-          </div>
-
-          {/* Info — grows to fill space */}
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <h3 className="text-sm font-extrabold tracking-tight" style={{ color: '#111111' }}>{product.project_name}</h3>
-              {product.project_project?.trim() && (
-                <span
-                  className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider"
-                  style={{
-                    background: 'rgba(57,255,20,0.08)',
-                    color: '#1a7a05',
-                    border: '1px solid rgba(57,255,20,0.2)',
-                  }}
-                >
-                  {product.project_project.trim()}
-                </span>
-              )}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              {/* Warranty */}
-              {product.project_warranty && (
-                <span className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-medium" style={{ background: '#f7f7f7', color: '#888', border: '1px solid #efefef' }}>
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#bbb" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                  {product.project_warranty}
-                </span>
-              )}
-
-              {/* Featured */}
+          {/* ── Mobile compact row ── */}
+          <div className="flex sm:hidden items-center gap-3 px-3 py-3.5">
+            {/* Icon */}
+            <div
+              className="shrink-0 relative flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-300"
+              style={{
+                background: hovered
+                  ? 'linear-gradient(135deg, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0.08) 100%)'
+                  : 'linear-gradient(135deg, rgba(57,255,20,0.09) 0%, rgba(57,255,20,0.04) 100%)',
+                border: `1px solid ${hovered ? 'rgba(57,255,20,0.4)' : 'rgba(57,255,20,0.18)'}`,
+                color: '#1a7a05',
+              }}
+            >
+              <CategoryIcon category={product.project_project ?? ''} />
               {product.is_featured && (
-                <span className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-semibold" style={{ background: 'rgba(57,255,20,0.07)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.18)' }}>
-                  ⭐ Featured
+                <span
+                  className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full"
+                  style={{ background: 'linear-gradient(135deg, #39FF14, #2ee60f)', boxShadow: '0 2px 6px rgba(57,255,20,0.5)' }}
+                >
+                  <svg width="7" height="7" viewBox="0 0 24 24" fill="#000">
+                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                  </svg>
                 </span>
               )}
             </div>
+
+            {/* Info */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1.5 mb-1">
+                <h3 className="text-sm font-extrabold truncate" style={{ color: '#111111' }}>{product.project_name}</h3>
+                {product.project_project?.trim() && (
+                  <span
+                    className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider"
+                    style={{ background: 'rgba(57,255,20,0.08)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.2)' }}
+                  >
+                    {product.project_project.trim()}
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5">
+                {product.project_warranty && (
+                  <span className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px] font-medium" style={{ background: '#f7f7f7', color: '#888', border: '1px solid #efefef' }}>
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#bbb" strokeWidth="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    {product.project_warranty}
+                  </span>
+                )}
+                {product.is_featured && (
+                  <span className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: 'rgba(57,255,20,0.07)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.18)' }}>
+                    ⭐ Featured
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Price + Order button */}
+            <div className="shrink-0 flex flex-col items-end gap-1.5">
+              <span className="text-lg font-black leading-none" style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>
+                {product.project_price ?? '—'}
+              </span>
+              <button
+                onClick={() => setModal(true)}
+                className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-bold transition-all duration-200"
+                style={{
+                  background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
+                  color: '#000000',
+                  boxShadow: '0 2px 8px rgba(57,255,20,0.35)',
+                }}
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                Order
+              </button>
+            </div>
           </div>
 
-          {/* Divider (desktop) */}
-          <div className="hidden sm:block shrink-0 w-px h-12 mx-1" style={{ background: 'rgba(0,0,0,0.06)' }} />
+          {/* ── Desktop row ── */}
+          <div className="hidden sm:flex items-center gap-4 px-6 py-5">
+            {/* Icon */}
+            <div
+              className="shrink-0 relative flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300"
+              style={{
+                background: hovered
+                  ? 'linear-gradient(135deg, rgba(57,255,20,0.18) 0%, rgba(57,255,20,0.08) 100%)'
+                  : 'linear-gradient(135deg, rgba(57,255,20,0.09) 0%, rgba(57,255,20,0.04) 100%)',
+                border: `1px solid ${hovered ? 'rgba(57,255,20,0.4)' : 'rgba(57,255,20,0.18)'}`,
+                color: '#1a7a05',
+              }}
+            >
+              <CategoryIcon category={product.project_project ?? ''} />
+              {product.is_featured && (
+                <span
+                  className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full"
+                  style={{ background: 'linear-gradient(135deg, #39FF14, #2ee60f)', boxShadow: '0 2px 8px rgba(57,255,20,0.5)' }}
+                >
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="#000">
+                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+                  </svg>
+                </span>
+              )}
+            </div>
 
-          {/* Price (desktop) */}
-          <div className="hidden sm:block shrink-0 text-right min-w-22.5">
-            <p className="text-[9px] font-bold uppercase tracking-widest mb-0.5" style={{ color: '#ccc' }}>Price</p>
-            <p className="text-2xl font-black leading-none" style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>{product.project_price ?? '—'}</p>
-            {priceUnit && <p className="text-[10px] mt-0.5" style={{ color: '#bbb' }}>{priceUnit}</p>}
+            {/* Info */}
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <h3 className="text-sm font-extrabold tracking-tight" style={{ color: '#111111' }}>{product.project_name}</h3>
+                {product.project_project?.trim() && (
+                  <span
+                    className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+                    style={{ background: 'rgba(57,255,20,0.08)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.2)' }}
+                  >
+                    {product.project_project.trim()}
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                {product.project_warranty && (
+                  <span className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-medium" style={{ background: '#f7f7f7', color: '#888', border: '1px solid #efefef' }}>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#bbb" strokeWidth="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    {product.project_warranty}
+                  </span>
+                )}
+                {product.is_featured && (
+                  <span className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-semibold" style={{ background: 'rgba(57,255,20,0.07)', color: '#1a7a05', border: '1px solid rgba(57,255,20,0.18)' }}>
+                    ⭐ Featured
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="shrink-0 w-px h-12 mx-1" style={{ background: 'rgba(0,0,0,0.06)' }} />
+
+            {/* Price */}
+            <div className="shrink-0 text-right min-w-22.5">
+              <p className="text-[9px] font-bold uppercase tracking-widest mb-0.5" style={{ color: '#ccc' }}>Price</p>
+              <p className="text-2xl font-black leading-none" style={{ color: '#1a7a05', letterSpacing: '-0.02em' }}>{product.project_price ?? '—'}</p>
+              {priceUnit && <p className="text-[10px] mt-0.5" style={{ color: '#bbb' }}>{priceUnit}</p>}
+            </div>
+
+            {/* Order CTA */}
+            <button
+              onClick={() => setModal(true)}
+              className="shrink-0 flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-200"
+              style={{
+                background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
+                color: '#000000',
+                boxShadow: hovered ? '0 6px 20px rgba(57,255,20,0.5)' : '0 3px 12px rgba(57,255,20,0.3)',
+                transform: hovered ? 'scale(1.03)' : 'scale(1)',
+              }}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+              Order Now
+            </button>
           </div>
 
-          {/* Mobile price inline */}
-          <div className="flex sm:hidden items-baseline gap-1">
-            <span className="text-xl font-black" style={{ color: '#1a7a05' }}>{product.project_price ?? '—'}</span>
-            {priceUnit && <span className="text-xs" style={{ color: '#bbb' }}>{priceUnit}</span>}
-          </div>
-
-          {/* Order CTA */}
-          <button
-            onClick={() => setModal(true)}
-            className="shrink-0 flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-200"
-            style={{
-              background: 'linear-gradient(135deg, #39FF14 0%, #2ee60f 100%)',
-              color: '#000000',
-              boxShadow: hovered ? '0 6px 20px rgba(57,255,20,0.5)' : '0 3px 12px rgba(57,255,20,0.3)',
-              transform: hovered ? 'scale(1.03)' : 'scale(1)',
-            }}
-          >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
-            Order Now
-          </button>
         </div>
       </div>
 
