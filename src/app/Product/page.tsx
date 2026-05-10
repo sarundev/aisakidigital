@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { fetchProducts, type ApiProduct } from '@/lib/api';
 import Subtitle from '@/components/Subtitle';
+import SupportBot from '@/components/SupportBot';
 
 const TELEGRAM_URL = 'https://t.me/T1_fakerrr';
 const FACEBOOK_URL = 'https://www.facebook.com/AisakiDigital';
@@ -323,7 +324,7 @@ function stockLevel(qty: number) {
 function ProductRow({ product }: { product: ApiProduct }) {
   const [hovered, setHovered] = useState(false);
   const [modal, setModal] = useState(false);
-
+  const warranty = product.duration;
   const priceUnit = product.price_unit ?? product.tags[0] ?? 'per unit';
   const qty = product.stock_quantity;
   const level = stockLevel(qty);
@@ -351,17 +352,20 @@ function ProductRow({ product }: { product: ApiProduct }) {
          
 
           {/* Info */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 ">
             <div className="flex items-center gap-1.5 mb-0.5">
               <CategoryIcon category={product.category} />
               <p className="text-[11px] font-bold truncate" style={{ color: '#111' }}>{product.name}</p>
+               
+             
               {/* {product.is_featured && (
                 <span className="shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ background: 'rgba(57,255,20,0.1)', color: '#1a7a05' }}>★</span>
               )} */}
             </div>
-            <p className="text-[10px] hidden" style={{ color: '#999' }}>{product.category}</p>
             
-           
+          
+            
+          
           </div>
            <div className="flex items-center justify-center gap-1 mt-1">
               <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ background: level.dot }} />
@@ -603,6 +607,7 @@ export default function ProductPage() {
           </div>
         </section>
 
+        <SupportBot />
       </main>
       <Footer />
     </>
