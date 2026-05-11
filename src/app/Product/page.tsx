@@ -555,7 +555,7 @@ export default function ProductPage() {
         <div className="h-12 sm:h-14" />
 
         {/* ── Table Section ── */}
-        <section className="px-3 sm:px-6 pb-28 md:pt-48 pt-52 sm:pt-32">
+        <section className="px-3 sm:px-6 pb-28 md:pt-48 pt-42 sm:pt-32">
           <div className="mx-auto max-w-5xl">
             <div className="overflow-hidden rounded-3xl  " style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)' }}>
               <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #39FF14 0%, #2ee60f 40%, #7fff3a 70%, #39FF14 100%)' }} />
