@@ -324,7 +324,7 @@ function CategoryIcon({ category }: { category: string }) {
 /* ─── Stock Level ───────────────────────────────────────────────────────── */
 
 function stockLevel(qty: number) {
-  if (qty === 0)  return { color: '#b91c1c', bg: 'rgba(239,68,68,0.07)',  dot: '#ef4444', ping: false };
+  if (qty === 0)  return { color: '#ef4444', bg: 'rgba(239,68,68,0.07)',  dot: '#ef4444', ping: false };
   if (qty < 1000) return { color: '#92400e', bg: 'rgba(245,158,11,0.09)', dot: '#f59e0b', ping: false };
   if (qty < 5000) return { color: '#b45309', bg: 'rgba(251,191,36,0.08)', dot: '#fbbf24', ping: false };
   return           { color: '#1a7a05',  bg: 'rgba(57,255,20,0.08)',  dot: '#39FF14', ping: true  };
@@ -356,12 +356,9 @@ function ProductRow({ product }: { product: ApiProduct }) {
           className="absolute left-0 top-0 bottom-0 w-0.5 rounded-r transition-all duration-300"
           style={{ background: 'linear-gradient(180deg, #39FF14, #2ee60f)', opacity: hovered ? 1 : 0 }}
         />
-
         {/* ── Mobile ── */}
         <div className="sm:hidden items-center gap-3 px-4 py-3.5 grid-cols-4 grid">
           {/* Icon */}
-         
-
           {/* Info */}
           <div className="flex-1 ">
             <div className="flex items-center gap-1.5 mb-0.5">
@@ -373,14 +370,10 @@ function ProductRow({ product }: { product: ApiProduct }) {
                 <span className="shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ background: 'rgba(57,255,20,0.1)', color: '#1a7a05' }}>★</span>
               )} */}
             </div>
-            
-          
-            
-          
           </div>
            <div className="flex items-center justify-center gap-1 mt-1">
-              <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ background: level.dot }} />
-              <span className="text-[15px] flex items-center justify-center font-semibold" style={{ color: level.color }}>
+              <span className="h-1.5 w-1.5 rounded-full shrink-0"  />
+              <span className="text-[13px] flex items-center justify-center font-semibold" style={{ color: level.color }}>
                 {qty}
               </span>
             </div>
