@@ -271,7 +271,7 @@ export default function Footer() {
           }}
         >
           <p style={{ color: 'rgba(80,80,80,34.55)', fontSize: '0.75rem', letterSpacing: '0.07em' }}>
-            © 2026 AISAKIDigital. All rights reserved.
+            © 2026 AisakiDigital . All rights reserved.
           </p>
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full"
