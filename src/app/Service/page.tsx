@@ -176,10 +176,7 @@ function CategoryIcon({ category }: { category: string }) {
   const cat = (category ?? '').trim().toLowerCase();
 
   if (cat === 'facebook') return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="12" fill="#1877F2" />
-      <path d="M15.5 8H13.5C13.2 8 13 8.2 13 8.5V10H15.5L15.2 12.5H13V19H10.5V12.5H9V10H10.5V8.5C10.5 6.6 11.6 5.5 13.5 5.5H15.5V8Z" fill="white" />
-    </svg>
+      <img src="/image/meta.png" alt="Instagram" width={22} height={22} style={{ borderRadius: 5, display: 'block' }} />
   );
   if (cat === 'tiktok') return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -334,7 +331,7 @@ function ProductCard({ product, index }: { product: Project; index: number }) {
               <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
-              {product.project_warranty} warranty
+              {product.project_warranty}
             </p>
           )}
         </div>

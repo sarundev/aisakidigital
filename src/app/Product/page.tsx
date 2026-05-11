@@ -273,14 +273,31 @@ function SkeletonRow() {
 
 function CategoryIcon({ category }: { category: string }) {
   const cat = category.toLowerCase();
- if (cat === 'facebook') {
+  if (cat === 'facebook') {
     return (
-      <img src="/image/facebook.png" alt="Instagram" width={24} height={24} style={{ borderRadius: 5, display: 'block' }} />
+      <span
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 28,
+          height: 28,
+          borderRadius: 8,
+          border: '1.5px solid rgba(24,119,242,0.5)',
+          flexShrink: 0,
+        }}
+      >
+        <img src="/image/facebook.png" alt="Facebook" width={20} height={20} style={{ display: 'block', borderRadius: 4 }} />
+      </span>
     );
   }
   if (cat === 'tiktok') {
     return (
-      <img src="/image/tiktok.png" alt="Instagram" className="-ml-0.5" width={26} height={26} style={{ borderRadius: 5, display: 'block' }} />
+      <span
+      >
+      <img src="/image/tiktok.png" alt="Instagram" className=" " width={26} height={26} style={{ borderRadius: 5, display: 'block' }} 
+       />
+       </span>
     );
   }
   if (cat === 'instagram') {
