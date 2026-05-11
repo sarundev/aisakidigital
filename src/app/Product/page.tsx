@@ -280,7 +280,7 @@ function CategoryIcon({ category }: { category: string }) {
   }
   if (cat === 'tiktok') {
     return (
-      <img src="/image/tiktok.png" alt="Instagram" width={28} height={28} style={{ borderRadius: 5, display: 'block' }} />
+      <img src="/image/tiktok.png" alt="Instagram" width={26} height={26} style={{ borderRadius: 5, display: 'block' }} />
     );
   }
   if (cat === 'instagram') {
