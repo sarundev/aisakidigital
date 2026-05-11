@@ -214,7 +214,7 @@ export default function Footer() {
               <a
                 key={item.title}
                 href="#"
-                className="group flex flex-col items-center gap-4 rounded-2xl px-4 py-6 text-center"
+                className="group flex flex-col items-center gap-4 rounded-2xl px-2 py-2 text-center"
                 style={{
                   border: '1px solid rgba(0,0,0,0.08)',
                   background: 'rgba(255,255,255,0.72)',
