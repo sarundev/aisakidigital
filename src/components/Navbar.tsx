@@ -355,9 +355,9 @@ export default function Navbar() {
                     <span
                       style={{
                         color: activeLink === link.href ? '#39FF14' : 'rgba(235,235,235,0.8)',
-                        fontSize: '1.85rem',
-                       fontFamily:"monospace",
-                        fontWeight: 400,
+                        fontSize: '1.55rem',
+                      fontFamily: 'var(--font-geist-sans), sans-serif',
+                        fontWeight: 800,
                         letterSpacing: '0.02em',
                         lineHeight: 1.15,
                         transition: 'color 0.22s ease, letter-spacing 0.3s ease',

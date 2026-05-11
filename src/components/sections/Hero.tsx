@@ -78,17 +78,15 @@ export default function Hero() {
         <TypewriterText />
 
         {/* Description */}
-        <div className="mx-auto max-w-xl flex">
-       <b>
-        AisakiDigital
-       </b>
-        <span
-          className="relative"
+      
+      
+        <p
+          className="relative mx-auto max-w-xl "
     
         >
-         is a trusted digital marketing agency in Cambodia specializing in Facebook Ads, TikTok growth, and online business promotion.
-        </span>
-        </div>
+       <b> AisakiDigital </b> is a trusted digital marketing agency in Cambodia specializing in Facebook Ads, TikTok growth, and online business promotion.
+        </p>
+      
 
         {/* CTA buttons */}
         {/* <div
