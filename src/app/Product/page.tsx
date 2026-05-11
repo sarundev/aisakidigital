@@ -99,8 +99,7 @@ function OrderModal({ product, onClose }: { product: ApiProduct; onClose: () => 
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 flex h-8 w-8 px-10 py-4 bg-green-600 font-extrabold text-white items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-90"
-     
+          className="absolute right-4 top-4 mt-2.5 flex h-8 w-8 px-10 py-4 bg-green-600 font-extrabold text-white items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-90"
         >
           Cancel
         </button>
