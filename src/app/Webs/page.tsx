@@ -254,7 +254,7 @@ export default function WebsPage() {
       <main className="min-h-screen">
 
         {/* ── Hero ── */}
-        <section className="relative overflow-hidden px-4 sm:px-6 pb-16 sm:pb-24 pt-28 sm:pt-36">
+        <section className="relative overflow-hidden px-4 sm:px-6  sm:pb-24 pt-28 sm:pt-36">
           <div className="pointer-events-none absolute" style={{ top: '-10%', left: '50%', transform: 'translateX(-50%)', width: '80vw', height: '60vh', background: 'radial-gradient(ellipse, rgba(57,255,20,0.09) 0%, transparent 65%)', filter: 'blur(50px)' }} />
           <div className="pointer-events-none absolute" style={{ bottom: '-5%', left: '5%', width: '35vw', height: '35vh', background: 'radial-gradient(ellipse, rgba(57,255,20,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }} />
           <div className="pointer-events-none absolute" style={{ bottom: '-5%', right: '5%', width: '35vw', height: '35vh', background: 'radial-gradient(ellipse, rgba(57,255,20,0.05) 0%, transparent 70%)', filter: 'blur(60px)' }} />
@@ -282,19 +282,12 @@ export default function WebsPage() {
               យើងបង្កើត Website, Mobile App, និង System ដ៏ស្អាតនិងល្អបំផុតសម្រាប់អាជីវកម្មរបស់អ្នក។
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-              {STATS.map((s) => (
-                <div key={s.value} className="flex flex-col items-center rounded-2xl px-5 py-3" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <span className="text-xl sm:text-2xl font-black" style={{ color: '#39FF14', letterSpacing: '-0.02em' }}>{s.value}</span>
-                  <span className="text-[10px] font-semibold uppercase tracking-wider mt-0.5" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'var(--font-khmer), sans-serif' }}>{s.labelKh}</span>
-                </div>
-              ))}
-            </div>
+            
           </div>
         </section>
 
         {/* ── Services Grid ── */}
-        <section className="px-4 sm:px-6 py-14 sm:py-20">
+        <section className="relative">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 sm:mb-14 text-center">
               <p className="mb-2 text-[11px] font-bold uppercase tracking-widest" style={{ color: '#39FF14' }}>What We Offer</p>
