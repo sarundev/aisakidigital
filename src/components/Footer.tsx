@@ -197,7 +197,7 @@ export default function Footer() {
             marginBottom: '3rem',
           }} />
 
-          <h3
+          {/* <h3
             className="mb-8 text-center text-xl font-semibold"
             style={{
               color: '#111111',
@@ -207,14 +207,14 @@ export default function Footer() {
             }}
           >
             Legal Information
-          </h3>
+          </h3> */}
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3 grid-cols-3">
             {LEGAL_ITEMS.map((item, i) => (
               <a
                 key={item.title}
                 href="#"
-                className="group flex flex-col items-center gap-4 rounded-2xl px-6 py-8 text-center"
+                className="group flex flex-col items-center gap-4 rounded-2xl px-4 py-6 text-center"
                 style={{
                   border: '1px solid rgba(0,0,0,0.08)',
                   background: 'rgba(255,255,255,0.72)',
@@ -240,7 +240,7 @@ export default function Footer() {
               >
                 {/* Icon container */}
                 <div
-                  className="flex h-14 w-14 items-center justify-center rounded-xl"
+                  className="flex h-12 w-12 items-center justify-center rounded-xl"
                   style={{
                     border: '1px solid rgba(57,255,20,0.3)',
                     background: 'rgba(57,255,20,0.07)',
@@ -249,12 +249,7 @@ export default function Footer() {
                   {item.icon}
                 </div>
 
-                <div className="font-semibold" style={{ color: '#111111', fontSize: '0.95rem' }}>
-                  {item.title}
-                </div>
-                <div style={{ color: 'rgba(80,80,80,0.7)', fontSize: '0.8rem', lineHeight: 1.55 }}>
-                  {item.desc}
-                </div>
+               
               </a>
             ))}
           </div>
