@@ -21,7 +21,7 @@ const notoSansKhmer = Noto_Sans_Khmer({
 });
 
 export const metadata: Metadata = {
-  title: "AISAKIDigital",
+  title: "AISAKI",
   description: "Professional Digital Services",
   icons: {
     icon: '/image/logo.png',

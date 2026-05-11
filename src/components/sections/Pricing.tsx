@@ -226,7 +226,7 @@ export default function Pricing() {
                       </div>
                     )}
 
-                    <p className="mb-3 font-bold" style={{ color: '#ffffff', fontSize: '5.05rem', letterSpacing: '0.02em' }}>
+                    <p className="mb-3 font-bold" style={{ color: '#ffffff', fontSize: '1.05rem', letterSpacing: '0.02em', fontFamily:'revert' }}>
                       {plan.name}
                     </p>
 
@@ -318,10 +318,9 @@ export default function Pricing() {
                     </div>
                   )}
 
-                  <p className="mb-3 font-bold" style={{ color: '#ffffff', fontSize: '2.05rem', letterSpacing: '0.02em' }}>
+                  <p className="mb-3 md:text-[30px] " style={{ color: '#ffffff', letterSpacing: '0.02em',fontFamily:'inherit' }}>
                     {plan.name}
                   </p>
-
                   <div className="mb-6 flex items-end gap-1.5 pb-6" style={{ borderBottom: '1px solid rgba(57,255,20,0.1)' }}>
                     <span className="font-extrabold leading-none" style={{ color: '#ffffff', fontSize: 'clamp(2.2rem, 5vw, 2.8rem)' }}>
                       {plan.price}
@@ -332,7 +331,6 @@ export default function Pricing() {
                       </span>
                     )}
                   </div>
-
                   <ul className="mb-8 flex flex-col gap-3.5">
                     {plan.features.map((f, j) => (
                       <li key={j} className="flex items-center gap-3">

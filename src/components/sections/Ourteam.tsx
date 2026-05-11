@@ -79,10 +79,10 @@ export default function Ourteam() {
               fontFamily: 'var(--font-khmer), sans-serif',
             }}
           >
-            Meet the Experts
+           Media Crew
           </h2>
           <p className="mx-auto max-w-md leading-relaxed text-gray-600">
-            Our diverse team of professionals brings together expertise in design, development, and strategy to deliver exceptional results.
+           Creative media team providing photography, videography, editing, and social media content for brands, businesses, and events.
           </p>
         </div>
 

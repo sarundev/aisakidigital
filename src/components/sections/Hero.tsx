@@ -78,18 +78,17 @@ export default function Hero() {
         <TypewriterText />
 
         {/* Description */}
-        <p
-          className="mx-auto mt-8 max-w-xl leading-relaxed"
-          style={{
-            color: '#666',
-            fontSize: 'clamp(0.9rem, 1.8vw, 1.05rem)',
-            letterSpacing: '0.015em',
-            animation: 'fade-in 0.8s ease 0.85s both',
-          }}
+        <div className="mx-auto max-w-xl flex">
+       <b>
+        AisakiDigital
+       </b>
+        <span
+          className="relative"
+    
         >
-          AiSaki Digital crafts high-performance websites, brand identities,
-          and digital strategies that elevate your brand and drive real results.
-        </p>
+         is a trusted digital marketing agency in Cambodia specializing in Facebook Ads, TikTok growth, and online business promotion.
+        </span>
+        </div>
 
         {/* CTA buttons */}
         {/* <div
