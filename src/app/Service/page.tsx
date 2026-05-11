@@ -95,12 +95,7 @@ function ContactModal({ product, onClose }: { product: Project; onClose: () => v
         <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg,#39FF14,#2ee60f,#7fff3a,#39FF14)' }} />
 
         {/* Close */}
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 mt-2.5 flex h-8 w-8 px-10 py-4 bg-green-500 font-extrabold text-white items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-90"
-        >
-          Cancel
-        </button>
+      
 
         <div className="px-6 pb-6 pt-5">
           {!sent ? (
@@ -228,16 +223,18 @@ function ContactModal({ product, onClose }: { product: Project; onClose: () => v
               <p className="text-xs mb-5" style={{ color: '#aaa' }}>
                 ក្រុមការងាររបស់យើងនឹងទាក់ទងអ្នកក្នុងពេលឆាប់ៗ
               </p>
-              <button
-                onClick={() => window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer')}
-                className="flex items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-bold"
-                style={{ background: 'linear-gradient(135deg,#39FF14,#2ee60f)', color: '#000', boxShadow: '0 4px 16px rgba(57,255,20,0.4)' }}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#000">
-                  <path d="M17.5 6.5l-2.1 10.2c-.15.7-.56.87-1.13.54l-3.13-2.3-1.51 1.45c-.17.17-.31.31-.63.31l.22-3.17 5.74-5.19c.25-.22-.05-.34-.39-.12L6.1 13.5 3.1 12.57c-.67-.21-.68-.67.14-.99l13.25-5.11c.56-.2 1.05.14.87.99z" />
-                </svg>
-                បើក Telegram
-              </button>
+              <div className="flex flex-col gap-2.5 w-full">
+                <button
+              onClick={onClose}
+              className="px-6 py-2 bg-green-500 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
+              style={{  border: '1px solid rgba(0,0,0,0.1)' }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0,0,0,0.1)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(0,0,0,0.06)'; }}
+            >
+             ចាកចេញ
+            </button>
+               
+              </div>
             </div>
           )}
         </div>
