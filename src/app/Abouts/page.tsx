@@ -63,14 +63,13 @@ const values = [
 ];
 
 const team = [
-  { name: 'T1 Faker', role: 'Founder & Lead Developer', initial: 'BR', color: '#39FF14' },
-  { name: 'Godd', role: 'Senior Developer', initial: 'SR', color: '#22c55e' },
-  { name: 'Sokha', role: 'UI/UX Designer', initial: 'SH', color: '#16a34a' },
-  { name: 'Rithy', role: 'Marketing Lead', initial: 'RT', color: '#15803d' },
-  { name: 'Dara', role: 'Project Manager', initial: 'DR', color: '#166534' },
-  { name: 'Vira', role: 'Backend Developer', initial: 'VR', color: '#14532d' },
+  { name: 'T1 Faker', role: 'Founder & Lead Developer', initial: '', color: 'rgba(57,255,20,0.15)' },
+  { name: 'Godd', role: 'Senior Developer', initial: '/image/godd.png', color: 'rgba(57,255,20,0.1)' },
+  { name: 'Sokha', role: 'UI/UX Designer', initial: '', color: 'rgba(57,255,20,0.1)' },
+  { name: 'Rithy', role: 'Marketing Lead', initial: '', color: 'rgba(57,255,20,0.1)' },
+  { name: 'Dara', role: 'Project Manager', initial: '', color: 'rgba(57,255,20,0.1)' },
+  { name: 'Vira', role: 'Backend Developer', initial: '', color: 'rgba(57,255,20,0.1)' },
 ];
-
 function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
   return (
     <div
@@ -136,15 +135,22 @@ function TeamCard({ member, index }: { member: typeof team[0]; index: number }) 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div
-        className="w-20 h-20 rounded-full flex items-center justify-center text-xl font-black mx-auto mb-5 transition-all duration-300"
-        style={{
-          background: member.color,
-          color: '#0a0f0a',
-          boxShadow: hovered ? `0 8px 24px ${member.color}66` : 'none',
-        }}
-      >
-        {member.initial}
+      <div className="w-24 h-24 rounded-full mx-auto mb-5 overflow-hidden relative" style={{ 
+        background: member.color || 'rgba(57,255,20,0.1)', 
+        border: '2px solid rgba(57,255,20,0.2)' 
+      }}>
+        {member.initial && member.initial.startsWith('/') ? (
+          <Image
+            src={member.initial}
+            alt={member.name}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-2xl font-bold" style={{ color: BRAND.primary }}>
+            {member.name.split(' ').map(n => n[0]).join('')}
+          </div>
+        )}
       </div>
       <h3 className="text-lg font-bold mb-1" style={{ color: '#fff' }}>{member.name}</h3>
       <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: BRAND.primary }}>{member.role}</p>
