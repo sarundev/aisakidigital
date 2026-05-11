@@ -277,7 +277,7 @@ export default function Footer() {
             <span className="h-1.5 w-1.5 rounded-full"
               style={{ background: '#39FF14', boxShadow: '0 0 8px rgba(57,255,20,0.8)' }} />
             <span style={{ color: 'rgba(80,80,80,24.45)', fontSize: '0.62rem', letterSpacing: '0.18em', fontFamily: 'monospace' }}>
-              AISAKIDIGITAL
+             AisakiDigital 
             </span>
           </div>
         </div>
