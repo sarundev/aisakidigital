@@ -236,10 +236,9 @@ function OrderModal({ product, onClose }: { product: ApiProduct; onClose: () => 
               <div className="flex flex-col gap-2.5 w-full">
                 <button
               onClick={onClose}
-              className="px-6 py-2 bg-green-00 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
+              className="px-6 py-2 bg-red-600 text-white rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
               style={{  border: '1px solid rgba(0,0,0,0.1)' }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0,0,0,0.1)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(0,0,0,0.06)'; }}
+             
             >
              ចាកចេញ
             </button>
