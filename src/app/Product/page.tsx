@@ -283,7 +283,7 @@ function CategoryIcon({ category }: { category: string }) {
           width: 28,
           height: 28,
           borderRadius: 8,
-          border: '1.5px solid rgba(24,119,242,0.5)',
+          border: '1px solid rgba(24,119,242,0.5)',
           flexShrink: 0,
         }}
       >
@@ -294,8 +294,21 @@ function CategoryIcon({ category }: { category: string }) {
   if (cat === 'tiktok') {
     return (
       <span
+      style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 28,
+          height: 28,
+          borderRadius: 8,
+          border: '1px solid rgba(0,0,0)',
+          flexShrink: 0,
+         
+        
+        }}
       >
-      <img src="/image/tiktok.png" alt="Instagram" className=" " width={26} height={26} style={{ borderRadius: 5, display: 'block' }} 
+      
+      <img src="/image/tiktok.png" alt="Instagram"  width={26} height={26} style={{ borderRadius: 5, display: 'block' }} 
        />
        </span>
     );

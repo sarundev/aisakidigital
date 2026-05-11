@@ -410,13 +410,13 @@ export default function ServicePage() {
 
         {/* ── Hero ── */}
        <div
-          className="fixed block h-42 left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-2 sm:py-4"
+          className="fixed block h-36 md:h-46 left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-2 sm:py-4"
           style={{ background: 'rgba(244,247,244,0.95)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(57,255,20,0.15)', boxShadow: '0 2px 20px rgba(0,0,0,0.06)' }}
         >
           <div className="mx-auto max-w-5xl  flex items-center md:h-28 pt-8 h-18 justify-center  gap-2">
             
             <span
-              className="font-black text-center text-[23px] sm:text-[22px] md:text-[32px]  mt-4 md:text-4xl"
+              className="font-black text-center text-[23px] sm:text-[22px] md:text-[32px]  mt-2 md:text-4xl"
               style={{
                  fontFamily: 'var(--font-khmer), sans-serif',
                 color: '#111',
@@ -424,24 +424,24 @@ export default function ServicePage() {
   
               }}
             >
-              តារា​តម្លៃ Social Media{' '} 
+              សេវាកម្ម​ផ្សេងៗ​ក្នុង {' '} 
               <span style={{ background: 'linear-gradient(135deg, #1a7a05, #39FF14)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                ល្អៗ Build ថ្មីៗ
+                Social Media
               </span>
             </span>
            
           </div>
-          <div className="relative mx-auto pt-8 md:pt-1  max-w-5xl flex items-center justify-center"
+          <div className="relative mx-auto pt-2 md:pt-1  max-w-5xl flex items-center justify-center"
           style={{
             fontFamily:"ui-monospace"
           }}
           >
-            <p className="text-black" style={{ fontSize:'14px'}}>មានលក់កញ្ចប់សម្រាប់បងៗ ប្រកបអាជីវកម្មតម្លៃ នឹងគុណភាពល្អ</p>
+            <p className="text-black" style={{ fontSize:'12px'}}>មានលក់កញ្ចប់សម្រាប់បងៗ ប្រកបអាជីវកម្មតម្លៃ នឹងគុណភាពល្អ</p>
           </div>
         </div>
 
         {/* ── Cards ── */}
-        <section className="px-4 sm:px-6 pt-[280px] pb-28">
+        <section className="px-4 sm:px-6 pt-[240px] md:pt-[280px] pb-28">
           <div className="mx-auto max-w-3xl">
             {loading ? (
               <div className="flex flex-col gap-2.5">
