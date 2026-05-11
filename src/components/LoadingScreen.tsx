@@ -86,7 +86,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
 >
   AISAKi DiGiTAL
 </h1>
-<img src="/image/loading.png" width={300} height={300} alt="" />
+<img src="/image/cover.png" width={300} height={300} alt="" />
 
         {/* Tagline */}
         <p

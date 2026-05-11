@@ -508,7 +508,7 @@ export default function ServicePage() {
             fontFamily:"ui-monospace"
           }}
           >
-            <p className="text-black" style={{ fontSize:'12px'}}>មានលក់កញ្ចប់សម្រាប់បងៗ ប្រកបអាជីវកម្មតម្លៃ នឹងគុណភាពល្អ</p>
+            <p className="text-black" style={{ fontSize:'12px'}}>រាល់ពេល​អតិថិជន​ជាវ​សេវាកម្ម​ណាមួយ​ ពួកយេីងនឹង​ប្រឹក្សា​យោបល់​ជូនដោយ​ឥតគិតថ្លៃ</p>
           </div>
         </div>
 
