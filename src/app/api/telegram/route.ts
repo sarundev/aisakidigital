@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+const CHAT_ID   = process.env.TELEGRAM_CHAT_ID;
 
 export async function POST(req: NextRequest) {
   if (!BOT_TOKEN || !CHAT_ID) {
@@ -9,17 +9,38 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Telegram not configured' }, { status: 500 });
   }
 
-  const { productName, productPrice, customerTelegram } = await req.json();
+  const body = await req.json() as {
+    type?: 'order' | 'subscribe';
+    productName?: string;
+    productPrice?: string;
+    customerTelegram?: string;
+    customerPhone?: string;
+  };
 
-  const customerLine = customerTelegram
-    ? `👤 Telegram: <b>@${customerTelegram}</b>`
-    : `👤 Telegram: <i>មិនបានផ្ដល់</i>`;
+  const { type = 'order', productName, productPrice, customerTelegram, customerPhone } = body;
 
-  const text =
-    `🛒 <b>មានអតិថិជនចង់ទិញ!</b>\n\n` +
-    `📦 ផលិតផល: <b>${productName}</b>\n` +
-    `💰 តម្លៃ: <b>${productPrice}</b>\n` +
-    customerLine;
+  let contactLine = '';
+  if (customerTelegram) {
+    contactLine = `👤 Telegram: <b>@${customerTelegram.replace('@', '')}</b>`;
+  } else if (customerPhone) {
+    contactLine = `📱 Phone: <b>${customerPhone}</b>`;
+  } else {
+    contactLine = `👤 Telegram: <i>មិនបានផ្ដល់</i>`;
+  }
+
+  let text = '';
+  if (type === 'subscribe') {
+    text =
+      `📩 <b>អតិថិជនចង់ Subscribe!</b>\n\n` +
+      contactLine + `\n` +
+      `📅 ថ្ងៃទី: <b>${new Date().toLocaleDateString('km-KH', { year: 'numeric', month: 'long', day: 'numeric' })}</b>`;
+  } else {
+    text =
+      `🛒 <b>មានអតិថិជនចង់ទិញ!</b>\n\n` +
+      `📦 ផលិតផល: <b>${productName ?? 'N/A'}</b>\n` +
+      `💰 តម្លៃ: <b>${productPrice ?? 'N/A'}</b>\n` +
+      contactLine;
+  }
 
   const res = await fetch(
     `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
