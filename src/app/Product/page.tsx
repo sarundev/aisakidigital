@@ -280,7 +280,7 @@ function CategoryIcon({ category }: { category: string }) {
   }
   if (cat === 'tiktok') {
     return (
-      <img src="/image/tiktok.png" alt="Instagram" width={24} height={24} style={{ borderRadius: 5, display: 'block' }} />
+      <img src="/image/tiktok.png" alt="Instagram" width={28} height={28} style={{ borderRadius: 5, display: 'block' }} />
     );
   }
   if (cat === 'instagram') {
@@ -363,12 +363,12 @@ function ProductRow({ product }: { product: ApiProduct }) {
           </div>
            <div className="flex items-center justify-center gap-1 mt-1">
               <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ background: level.dot }} />
-              <span className="text-[11px] flex items-center justify-center font-semibold" style={{ color: level.color }}>
+              <span className="text-[15px] flex items-center justify-center font-semibold" style={{ color: level.color }}>
                 {qty}
               </span>
             </div>
           <div className="relative flex items-center justify-center ">
-            <span className="text-[11px] font-black leading-none" style={{ color: '#1a7a05' }}>
+            <span className="text-[15px] font-black leading-none" style={{ color: '#1a7a05' }}>
               {product.price}
             </span>
           </div>
