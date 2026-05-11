@@ -377,7 +377,7 @@ function ProductRow({ product }: { product: ApiProduct }) {
                 {qty}
               </span>
             </div>
-          <div className="relative flex items-center justify-center ">
+          <div className="relative pl-4 flex items-center justify-center ">
             <span className="text-[15px] font-black leading-none" style={{ color: '#1a7a05' }}>
               {product.price}
             </span>
@@ -562,11 +562,11 @@ export default function ProductPage() {
 
               {/* Mobile header */}
               <div className="flex sm:hidden items-center justify-between px-4 py-3" style={{ background: 'linear-gradient(180deg, rgba(57,255,20,0.05) 0%, transparent 100%)', borderBottom: '1px solid rgba(57,255,20,0.1)' }}>
-                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.14em' }}>PRODUCT</span>
-                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.14em' }}> STOCK</span>
-                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.14em' }}> PRICE</span>
+                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.13em' }}>PRODUCT</span>
+                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.13em' }}> STOCK</span>
+                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{  letterSpacing: '0.13em' }}> PRICE</span>
    
-                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{ letterSpacing: '0.14em' }}>ACTION</span>
+                <span className="text-[13px] font-extrabold tracking-widest text-black" style={{ letterSpacing: '0.13em' }}>ACTION</span>
               </div>
 
               {/* Desktop header — 4 cols matching the row grid */}
