@@ -315,7 +315,10 @@ function CategoryIcon({ category }: { category: string }) {
   }
   if (cat === 'instagram') {
     return (
-      <img src="/image/instagram.png" alt="Instagram" width={26} height={26} style={{ borderRadius: 5, display: 'block' }} />
+     
+      
+      <img src="/image/instagram.png" alt="Instagram" width={28} height={28} style={{ borderRadius: 5, display: 'block' }} />
+  
     );
   }
   if (cat === 'telegram') {
