@@ -396,7 +396,7 @@ export default function Navbar() {
                 <span
                   style={{ color: 'rgba(255,255,255,25.18)', fontSize: '0.58rem', letterSpacing: '0.18em', fontFamily: 'monospace' }}
                 >
-                  AISAKI DIGITAL © 2025
+                  AisakiDigital  © 2025
                 </span>
               </div>
             </div>
