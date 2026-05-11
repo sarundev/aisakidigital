@@ -153,6 +153,7 @@ function OrderModal({ product, onClose }: { product: ApiProduct; onClose: () => 
                     placeholder="+855 12 345 678  or  @your_username"
                     value={contact}
                     onChange={(e) => setContact(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter' && contact.trim() && !sending) handleOrder(); }}
                     className="flex-1 bg-transparent text-sm outline-none"
                     style={{ color: '#111', caretColor: '#39FF14' }}
                   />
@@ -182,10 +183,9 @@ function OrderModal({ product, onClose }: { product: ApiProduct; onClose: () => 
                       កំពុងផ្ញើ…
                     </>
                   ) : (
-                    <>🛒 បញ្ជាទិញ</>
+                    <>📩 ទំនាក់ទំនងឥឡូវ</>
                   )}
                 </button>
-
                 <div className="flex gap-2">
                   <button
                     className="flex flex-1 items-center justify-center gap-2 rounded-2xl py-3 text-xs font-semibold transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
@@ -238,7 +238,6 @@ function OrderModal({ product, onClose }: { product: ApiProduct; onClose: () => 
               onClick={onClose}
               className="px-6 py-2 bg-red-600 text-white rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
               style={{  border: '1px solid rgba(0,0,0,0.1)' }}
-             
             >
              ចាកចេញ
             </button>
