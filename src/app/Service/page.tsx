@@ -5,6 +5,14 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SupportBot from '@/components/SupportBot';
 
+async function notifyTelegram(payload: Record<string, string>) {
+  await fetch('/api/telegram', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  }).catch(() => {});
+}
+
 interface Project {
   id: number;
   project_name: string;
@@ -21,149 +29,217 @@ const FACEBOOK_URL = 'https://www.facebook.com/AisakiDigital';
 /* ─── Contact Modal ──────────────────────────────────────────────────────── */
 
 function ContactModal({ product, onClose }: { product: Project; onClose: () => void }) {
-  const [show, setShow] = useState(false);
+  const [contact, setContact] = useState('');
+  const [sent,    setSent]    = useState(false);
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setShow(true), 10);
     document.body.style.overflow = 'hidden';
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', onKey);
     return () => {
-      clearTimeout(t);
       document.body.style.overflow = '';
       document.removeEventListener('keydown', onKey);
     };
   }, [onClose]);
 
+  const isPhone    = /^\+?\d/.test(contact.trim());
+  const isTelegram = contact.trim().startsWith('@') || (!isPhone && contact.trim().length > 0);
+
+  async function handleOrder() {
+    setSending(true);
+    await notifyTelegram({
+      type: 'service',
+      productName:      product.project_name,
+      productPrice:     product.project_price ?? '',
+      customerTelegram: isTelegram ? contact.trim() : '',
+      customerPhone:    isPhone    ? contact.trim() : '',
+    });
+    setSending(false);
+    setSent(true);
+  }
+
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col justify-end sm:items-center sm:justify-center p-0 sm:p-4"
-      style={{
-      
-        backdropFilter: 'blur(12px)',
-        transition: 'background 0.25s ease',
-      }}
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+      style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(12px)' }}
       onClick={onClose}
     >
+      <style>{`
+        @keyframes cm-slide-up {
+          from { transform: translateY(40px); opacity: 0; }
+          to   { transform: translateY(0);    opacity: 1; }
+        }
+        @keyframes cm-pop {
+          0%   { transform: scale(0.7); opacity: 0; }
+          70%  { transform: scale(1.1); }
+          100% { transform: scale(1);   opacity: 1; }
+        }
+        @keyframes cm-check-draw {
+          from { stroke-dashoffset: 60; }
+          to   { stroke-dashoffset: 0;  }
+        }
+      `}</style>
+
       <div
         className="relative w-full sm:max-w-sm rounded-t-3xl sm:rounded-3xl overflow-hidden"
         style={{
-          background: '#0d1117',
-          border: '1px solid rgba(57,255,20,0.2)',
-          boxShadow: '0 -8px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(57,255,20,0.08) inset',
-          transform: show ? 'translateY(0)' : 'translateY(100%)',
-          transition: 'transform 0.35s cubic-bezier(0.32,0.72,0,1)',
+          background: '#ffffff',
+          border: '1px solid rgba(57,255,20,0.15)',
+          boxShadow: '0 32px 80px rgba(0,0,0,0.2)',
+          animation: 'cm-slide-up 0.35s cubic-bezier(0.32,0.72,0,1) forwards',
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Neon top line */}
-        <div style={{ height: 2, background: 'linear-gradient(90deg, transparent, #39FF14 40%, #39FF14 60%, transparent)' }} />
+        {/* Top accent */}
+        <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg,#39FF14,#2ee60f,#7fff3a,#39FF14)' }} />
 
-        <div className="p-6 sm:p-7">
-          {/* Drag handle — mobile */}
-          <div className="flex justify-center mb-5 sm:hidden">
-            <div className="w-10 h-1 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-          </div>
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 mt-2.5 flex h-8 w-8 px-10 py-4 bg-green-500 font-extrabold text-white items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-90"
+        >
+          Cancel
+        </button>
 
-          {/* Close */}
-          <button
-            onClick={onClose}
-            className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-150"
-            style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.4)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          </button>
-
-          {/* Header */}
-          <div className="mb-5">
-            <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: '#39FF14' }}>
-              Get a Quote
-            </p>
-            <h3 className="text-xl font-black text-white leading-tight">{product.project_name}</h3>
-          </div>
-
-          {/* Price */}
-          {product.project_price && (
-            <div
-              className="mb-5 flex items-center gap-3 rounded-2xl px-5 py-4"
-              style={{
-                background: 'rgba(57,255,20,0.06)',
-                border: '1px solid rgba(57,255,20,0.15)',
-              }}
-            >
-              <div>
-                <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-0.5">Monthly price</p>
-                <p className="text-3xl font-black" style={{ color: '#39FF14', letterSpacing: '-0.03em' }}>
-                  {product.project_price}
-                </p>
+        <div className="px-6 pb-6 pt-5">
+          {!sent ? (
+            <>
+              {/* Header */}
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl shrink-0"
+                  style={{ background: 'rgba(57,255,20,0.1)', border: '1px solid rgba(57,255,20,0.2)' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a7a05" strokeWidth="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: '#39FF14' }}>Subscribe</p>
+                  <h3 className="text-base font-extrabold leading-tight" style={{ color: '#111' }}>{product.project_name}</h3>
+                </div>
               </div>
-              {product.project_warranty && (
-                <div className="ml-auto text-right">
-                  <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-0.5">Warranty</p>
-                  <p className="text-sm font-semibold text-gray-300">{product.project_warranty}</p>
+
+              {/* Price badge */}
+              {product.project_price && (
+                <div className="mb-5 flex items-baseline gap-1.5 rounded-2xl px-4 py-3"
+                  style={{ background: 'rgba(57,255,20,0.06)', border: '1px solid rgba(57,255,20,0.14)' }}>
+                  <span className="text-3xl font-black" style={{ color: '#1a7a05' }}>{product.project_price}</span>
+                  {product.project_warranty && (
+                    <span className="text-sm" style={{ color: '#999' }}>{product.project_warranty}</span>
+                  )}
                 </div>
               )}
+
+              {/* Contact input */}
+              <div className="mb-5">
+                <label className="mb-2 block text-xs font-semibold" style={{ color: '#555' }}>
+                  📱 Phone Number or @Telegram Username
+                </label>
+                <div
+                  className="flex items-center gap-2 rounded-xl px-3 py-3 transition-all duration-200 focus-within:ring-2 focus-within:ring-green-300"
+                  style={{ border: '1.5px solid rgba(57,255,20,0.3)', background: 'rgba(57,255,20,0.03)' }}
+                >
+                  <span className="text-base shrink-0">
+                    {isPhone ? '📱' : isTelegram ? '✈️' : '💬'}
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="+855 12 345 678  or  @your_username"
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter' && contact.trim()) handleOrder(); }}
+                    className="flex-1 bg-transparent text-sm outline-none"
+                    style={{ color: '#111', caretColor: '#39FF14' }}
+                  />
+                </div>
+                <p className="mt-1.5 text-[11px]" style={{ color: '#aaa' }}>
+                  យើងនឹងទាក់ទងអ្នកតាម Telegram ឬ Phone ភ្លាមៗ
+                </p>
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-col gap-2.5">
+                <button
+                  onClick={handleOrder}
+                  disabled={sending || !contact.trim()}
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-sm font-bold transition-all duration-200 disabled:opacity-50"
+                  style={{
+                    background: 'linear-gradient(135deg,#39FF14,#2ee60f)',
+                    color: '#000',
+                    boxShadow: contact.trim() ? '0 6px 20px rgba(57,255,20,0.45)' : 'none',
+                  }}
+                >
+                  {sending ? (
+                    <>
+                      <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                      </svg>
+                      កំពុងផ្ញើ…
+                    </>
+                  ) : (
+                    <>📩 ទំនាក់ទំនងឥឡូវ</>
+                  )}
+                </button>
+
+                <div className="flex gap-2">
+                  <button
+                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl py-3 text-xs font-semibold transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
+                    style={{ background: 'rgba(36,161,222,0.08)', color: '#24A1DE', border: '1px solid rgba(36,161,222,0.2)' }}
+                    onClick={() => {
+                      notifyTelegram({ type: 'service', productName: product.project_name, productPrice: product.project_price ?? '', customerTelegram: contact.trim() });
+                      window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer');
+                    }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#24A1DE">
+                      <path d="M17.5 6.5l-2.1 10.2c-.15.7-.56.87-1.13.54l-3.13-2.3-1.51 1.45c-.17.17-.31.31-.63.31l.22-3.17 5.74-5.19c.25-.22-.05-.34-.39-.12L6.1 13.5 3.1 12.57c-.67-.21-.68-.67.14-.99l13.25-5.11c.56-.2 1.05.14.87.99z" />
+                    </svg>
+                    Telegram
+                  </button>
+                  <a
+                    href={FACEBOOK_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-2xl py-3 text-xs font-semibold transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
+                    style={{ background: 'rgba(24,119,242,0.08)', color: '#1877F2', border: '1px solid rgba(24,119,242,0.2)' }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#1877F2">
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                    Facebook
+                  </a>
+                </div>
+              </div>
+            </>
+          ) : (
+            /* ── Success state ── */
+            <div className="flex flex-col items-center py-6 text-center" style={{ animation: 'cm-pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards' }}>
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full"
+                style={{ background: 'rgba(57,255,20,0.12)', border: '2px solid rgba(57,255,20,0.35)' }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a7a05" strokeWidth="2.5"
+                  strokeLinecap="round" strokeLinejoin="round"
+                  style={{ strokeDasharray: 60, animation: 'cm-check-draw 0.5s ease forwards 0.1s', strokeDashoffset: 60 }}>
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <p className="text-lg font-extrabold mb-1" style={{ color: '#111' }}>បានផ្ញើរួចរាល់! ✅</p>
+              <p className="text-sm mb-1" style={{ color: '#555' }}>
+                យើងទទួលបានការស្នើសុំរបស់អ្នករួចហើយ
+              </p>
+              <p className="text-xs mb-5" style={{ color: '#aaa' }}>
+                ក្រុមការងាររបស់យើងនឹងទាក់ទងអ្នកក្នុងពេលឆាប់ៗ
+              </p>
+              <button
+                onClick={() => window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer')}
+                className="flex items-center gap-2 rounded-2xl px-5 py-2.5 text-sm font-bold"
+                style={{ background: 'linear-gradient(135deg,#39FF14,#2ee60f)', color: '#000', boxShadow: '0 4px 16px rgba(57,255,20,0.4)' }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#000">
+                  <path d="M17.5 6.5l-2.1 10.2c-.15.7-.56.87-1.13.54l-3.13-2.3-1.51 1.45c-.17.17-.31.31-.63.31l.22-3.17 5.74-5.19c.25-.22-.05-.34-.39-.12L6.1 13.5 3.1 12.57c-.67-.21-.68-.67.14-.99l13.25-5.11c.56-.2 1.05.14.87.99z" />
+                </svg>
+                បើក Telegram
+              </button>
             </div>
           )}
-
-          <p className="mb-5 text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>
-            Choose your preferred platform — we&apos;ll get back to you right away.
-          </p>
-
-          <div className="flex flex-col gap-2.5">
-            <button
-              className="flex w-full items-center gap-3 rounded-2xl px-4 py-3.5 text-left transition-all duration-150"
-              style={{ background: 'rgba(36,161,222,0.1)', border: '1px solid rgba(36,161,222,0.2)' }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(36,161,222,0.18)'; e.currentTarget.style.borderColor = 'rgba(36,161,222,0.4)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(36,161,222,0.1)'; e.currentTarget.style.borderColor = 'rgba(36,161,222,0.2)'; }}
-              onClick={() => {
-                fetch('/api/telegram', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ productName: product.project_name, productPrice: product.project_price }),
-                }).catch(() => {});
-                window.open(TELEGRAM_URL, '_blank', 'noopener,noreferrer');
-              }}
-            >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="12" fill="#24A1DE" />
-                <path d="M17.5 6.5l-2.1 10.2c-.15.7-.56.87-1.13.54l-3.13-2.3-1.51 1.45c-.17.17-.31.31-.63.31l.22-3.17 5.74-5.19c.25-.22-.05-.34-.39-.12L6.1 13.5 3.1 12.57c-.67-.21-.68-.67.14-.99l13.25-5.11c.56-.2 1.05.14.87.99z" fill="white" />
-              </svg>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-white">Telegram</div>
-                <div className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>Message us instantly</div>
-              </div>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
-
-            <a
-              href={FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-2xl px-4 py-3.5 transition-all duration-150"
-              style={{ background: 'rgba(24,119,242,0.1)', border: '1px solid rgba(24,119,242,0.2)' }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(24,119,242,0.18)'; e.currentTarget.style.borderColor = 'rgba(24,119,242,0.4)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(24,119,242,0.1)'; e.currentTarget.style.borderColor = 'rgba(24,119,242,0.2)'; }}
-            >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="12" fill="#1877F2" />
-                <path d="M15.5 8H13.5C13.2 8 13 8.2 13 8.5V10H15.5L15.2 12.5H13V19H10.5V12.5H9V10H10.5V8.5C10.5 6.6 11.6 5.5 13.5 5.5H15.5V8Z" fill="white" />
-              </svg>
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-white">Facebook</div>
-                <div className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>Message us on Facebook</div>
-              </div>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
         </div>
       </div>
     </div>
