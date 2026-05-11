@@ -226,7 +226,7 @@ export default function Pricing() {
                       </div>
                     )}
 
-                    <p className="mb-3 font-bold" style={{ color: '#ffffff', fontSize: '1.05rem', letterSpacing: '0.02em' }}>
+                    <p className="mb-3 font-bold" style={{ color: '#ffffff', fontSize: '5.05rem', letterSpacing: '0.02em' }}>
                       {plan.name}
                     </p>
 
@@ -318,7 +318,7 @@ export default function Pricing() {
                     </div>
                   )}
 
-                  <p className="mb-3 font-bold" style={{ color: '#ffffff', fontSize: '1.05rem', letterSpacing: '0.02em' }}>
+                  <p className="mb-3 font-bold" style={{ color: '#ffffff', fontSize: '2.05rem', letterSpacing: '0.02em' }}>
                     {plan.name}
                   </p>
 
