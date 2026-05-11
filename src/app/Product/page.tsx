@@ -521,10 +521,10 @@ export default function ProductPage() {
 
         {/* ── Fixed title bar ── */}
         <div
-          className="fixed block h-42 left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-2 sm:py-4"
+          className="fixed block h-34 left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-2 sm:py-4"
           style={{ background: 'rgba(244,247,244,0.95)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(57,255,20,0.15)', boxShadow: '0 2px 20px rgba(0,0,0,0.06)' }}
         >
-          <div className="mx-auto max-w-5xl  flex items-center md:h-28 pt-8 h-18 justify-center  gap-2">
+          <div className="mx-auto max-w-5xl  flex items-center md:h-28 pt-4 h-18 justify-center  gap-2">
             
             <span
               className="font-black text-center text-[23px] sm:text-[22px] md:text-[32px]  mt-4 md:text-4xl"
@@ -542,7 +542,7 @@ export default function ProductPage() {
             </span>
            
           </div>
-          <div className="relative mx-auto pt-8 md:pt-1  max-w-5xl flex items-center justify-center"
+          <div className="relative mx-auto pt-4 md:pt-1  max-w-5xl flex items-center justify-center"
           style={{
             fontFamily:"ui-monospace"
           }}
