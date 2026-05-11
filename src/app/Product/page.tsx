@@ -273,30 +273,24 @@ function SkeletonRow() {
 
 function CategoryIcon({ category }: { category: string }) {
   const cat = category.toLowerCase();
-  if (cat === 'facebook') {
+ if (cat === 'facebook') {
     return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="12" fill="#1877F2" />
-        <path d="M15.5 8H13.5C13.2 8 13 8.2 13 8.5V10H15.5L15.2 12.5H13V19H10.5V12.5H9V10H10.5V8.5C10.5 6.6 11.6 5.5 13.5 5.5H15.5V8Z" fill="white" />
-      </svg>
+      <img src="/image/facebook.png" alt="Instagram" width={24} height={24} style={{ borderRadius: 5, display: 'block' }} />
     );
   }
   if (cat === 'tiktok') {
     return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="12" fill="#010101" />
-        <path d="M16.5 7.2c-.7-.8-1.1-1.9-1.1-3h-2.1v9.6c0 1-.8 1.8-1.8 1.8s-1.8-.8-1.8-1.8.8-1.8 1.8-1.8c.2 0 .4 0 .6.1V9.9c-.2 0-.4-.1-.6-.1-2.2 0-3.9 1.8-3.9 3.9s1.7 3.9 3.9 3.9 3.9-1.8 3.9-3.9V10c.8.6 1.7.9 2.7.9V8.8c-.6 0-1.1-.2-1.6-.6v-1z" fill="white" />
-      </svg>
+      <img src="/image/tiktok.png" alt="Instagram" width={24} height={24} style={{ borderRadius: 5, display: 'block' }} />
     );
   }
   if (cat === 'instagram') {
     return (
-      <img src="/image/instagram.png" alt="Instagram" width={20} height={20} style={{ borderRadius: 5, display: 'block' }} />
+      <img src="/image/instagram.png" alt="Instagram" width={24} height={24} style={{ borderRadius: 5, display: 'block' }} />
     );
   }
   if (cat === 'telegram') {
     return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <circle cx="12" cy="12" r="12" fill="#24A1DE" />
         <path d="M17.5 6.5l-2.1 10.2c-.15.7-.56.87-1.13.54l-3.13-2.3-1.51 1.45c-.17.17-.31.31-.63.31l.22-3.17 5.74-5.19c.25-.22-.05-.34-.39-.12L6.1 13.5 3.1 12.57c-.67-.21-.68-.67.14-.99l13.25-5.11c.56-.2 1.05.14.87.99z" fill="white" />
       </svg>
@@ -607,7 +601,6 @@ export default function ProductPage() {
           </div>
         </section>
 
-        <SupportBot />
       </main>
       <Footer />
     </>
