@@ -341,7 +341,6 @@ function SubscribeModal({ onClose }: { onClose: () => void }) {
                   </div>
                 ))}
               </div>
-
               {/* Input */}
               <div className="mb-4">
                 <label className="mb-2 block text-xs font-semibold" style={{ color: '#888' }}>
@@ -658,7 +657,7 @@ export default function ProductPage() {
             </span>
           </div>
           <div className="relative mx-auto pt-4 md:pt-1 max-w-5xl flex items-center justify-center" style={{ fontFamily:'ui-monospace' }}>
-            <p className="text-black" style={{ fontSize:'14px' }}>មានលក់កញ្ចប់សម្រាប់បងៗ ប្រកបអាជីវកម្មតម្លៃ នឹងគុណភាពល្អ</p>
+            <p className="text-black" style={{ fontSize:'14px' }}>មានលក់ផេកអាខោនសម្រាប់បងៗ​ យកទៅប្រកប​អាជីវកម្មតូចធំគ្រប់ប្រភេទ​ ធានា​តម្លៃនិងគុណភាព</p>
           </div>
         </div>
 
