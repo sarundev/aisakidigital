@@ -642,7 +642,7 @@ export default function ProductPage() {
 
         {/* ── Fixed title bar ── */}
         <div
-          className="fixed block h-34 left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-2 sm:py-4"
+          className="fixed block h-42 md:h-42 left-0 right-0 top-16.5 z-30 px-4 sm:px-6 py-2 sm:py-4"
           style={{ background:'rgba(244,247,244,0.95)', backdropFilter:'blur(16px)', borderBottom:'1px solid rgba(57,255,20,0.15)', boxShadow:'0 2px 20px rgba(0,0,0,0.06)' }}
         >
           <div className="mx-auto max-w-5xl flex items-center md:h-28 pt-4 h-18 justify-center gap-2">
@@ -657,14 +657,17 @@ export default function ProductPage() {
             </span>
           </div>
           <div className="relative mx-auto pt-4 md:pt-1 max-w-5xl flex items-center justify-center" style={{ fontFamily:'ui-monospace' }}>
-            <p className="text-black" style={{ fontSize:'14px' }}>មានលក់ផេកអាខោនសម្រាប់បងៗ​ យកទៅប្រកប​អាជីវកម្មតូចធំគ្រប់ប្រភេទ​ ធានា​តម្លៃនិងគុណភាព</p>
+            <span className="text-black hidden md:block" style={{ fontSize:'14px' }}>មានលក់ផេកអាខោនសម្រាប់បងៗ​ យកទៅប្រកប​អាជីវកម្មតូចធំគ្រប់ប្រភេទ​ ធានា​តម្លៃនិងគុណភាព</span>
+          </div>
+          <div className="relative mx-auto md:hidden pt-4 md:pt-1 max-w-5xl flex items-center justify-center" style={{ fontFamily:'ui-monospace' }}>
+            <span className="text-black" style={{ fontSize:'14px' }}>មានលក់ផេកអាខោនសម្រាប់បងៗ​ យកទៅប្រកប​អាជីវកម្មតូចធំគ្រប់ប្រភេទ <p className="flex justify-center items-center">​ ធានា​តម្លៃនិងគុណភាព</p></span>
           </div>
         </div>
 
         <div className="h-12 sm:h-14" />
 
         {/* ── Table ── */}
-        <section className="px-3 sm:px-6 pb-40 md:pt-48 pt-42 sm:pt-32">
+        <section className="px-3 sm:px-6 pb-40 md:pt-48 pt-48 sm:pt-32">
           <div className="mx-auto max-w-5xl">
             <div className="overflow-hidden rounded-3xl"
               style={{ background:'#ffffff', border:'1px solid rgba(0,0,0,0.06)', boxShadow:'0 20px 60px rgba(0,0,0,0.08),0 4px 16px rgba(0,0,0,0.04)' }}>
