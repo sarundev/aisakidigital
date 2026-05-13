@@ -1,5 +1,5 @@
-const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8080/api/v1';
-export const STORAGE = process.env.NEXT_PUBLIC_STORAGE_URL ?? 'http://localhost:8080';
+const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'https://aisakiadmin.com/api/v1';
+export const STORAGE = process.env.NEXT_PUBLIC_STORAGE_URL ?? 'https://aisakiadmin.com';
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`, { next: { revalidate: 60 } });
