@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SupportBot from '@/components/SupportBot';
+import { trackView, trackClick, getSessionId } from '@/lib/api';
 
 async function notifyTelegram(payload: Record<string, string>) {
   await fetch('/api/telegram', {
@@ -48,13 +49,16 @@ function ContactModal({ product, onClose }: { product: Project; onClose: () => v
 
   async function handleOrder() {
     setSending(true);
-    await notifyTelegram({
-      type: 'service',
-      productName:      product.project_name,
-      productPrice:     product.project_price ?? '',
-      customerTelegram: isTelegram ? contact.trim() : '',
-      customerPhone:    isPhone    ? contact.trim() : '',
-    });
+    await Promise.all([
+      notifyTelegram({
+        type: 'service',
+        productName:      product.project_name,
+        productPrice:     product.project_price ?? '',
+        customerTelegram: isTelegram ? contact.trim() : '',
+        customerPhone:    isPhone    ? contact.trim() : '',
+      }),
+      trackClick(getSessionId(), 'subscribe_service', product.id, product.project_name),
+    ]);
     setSending(false);
     setSent(true);
   }
@@ -455,6 +459,10 @@ function ProductCard({ product, index }: { product: Project; index: number }) {
 export default function ServicePage() {
   const [products, setProducts] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    trackView(getSessionId(), '/Service', document.referrer);
+  }, []);
 
   useEffect(() => {
     const base = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8001/api/v1';

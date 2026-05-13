@@ -118,6 +118,39 @@ export const fetchProducts    = () => get<ApiProduct[]>('/products');
 export const fetchProjects    = () => get<ApiProject[]>('/projects');
 export const fetchActivities  = () => get<ApiActivity[]>('/activities');
 
+// ─── Tracking ─────────────────────────────────────────────────────────────────
+
+export function getSessionId(): string {
+  if (typeof window === 'undefined') return 'ssr';
+  let id = localStorage.getItem('_asaki_sid');
+  if (!id) {
+    id = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem('_asaki_sid', id);
+  }
+  return id;
+}
+
+export async function trackView(sessionId: string, page: string, referrer?: string): Promise<void> {
+  await fetch(`${BASE}/track/view`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ session_id: sessionId, page, referrer: referrer ?? '' }),
+  }).catch(() => {});
+}
+
+export async function trackClick(
+  sessionId: string,
+  eventType: 'order_product' | 'subscribe_service',
+  itemId: number,
+  itemName: string,
+): Promise<void> {
+  await fetch(`${BASE}/track/click`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ session_id: sessionId, event_type: eventType, item_id: itemId, item_name: itemName }),
+  }).catch(() => {});
+}
+
 export async function submitContact(payload: ContactPayload): Promise<void> {
   const res = await fetch(`${BASE}/contact`, {
     method: 'POST',

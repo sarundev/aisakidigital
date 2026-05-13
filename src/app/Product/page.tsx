@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { fetchProducts, type ApiProduct } from '@/lib/api';
+import { fetchProducts, trackView, trackClick, getSessionId, type ApiProduct } from '@/lib/api';
 import SupportBot from '@/components/SupportBot';
 
 const TELEGRAM_URL  = 'https://t.me/aisakidigital';
@@ -50,13 +50,16 @@ function OrderModal({ product, onClose }: { product: ApiProduct; onClose: () => 
 
   async function handleOrder() {
     setSending(true);
-    await notifyTelegram({
-      type: 'order',
-      productName:     product.name,
-      productPrice:    product.price ?? '',
-      customerTelegram: isTelegram ? contact.trim() : '',
-      customerPhone:    isPhone    ? contact.trim() : '',
-    });
+    await Promise.all([
+      notifyTelegram({
+        type: 'order',
+        productName:     product.name,
+        productPrice:    product.price ?? '',
+        customerTelegram: isTelegram ? contact.trim() : '',
+        customerPhone:    isPhone    ? contact.trim() : '',
+      }),
+      trackClick(getSessionId(), 'order_product', product.id, product.name),
+    ]);
     setSending(false);
     setSent(true);
   }
@@ -273,11 +276,14 @@ function SubscribeModal({ onClose }: { onClose: () => void }) {
 
   async function handleSubscribe() {
     setSending(true);
-    await notifyTelegram({
-      type: 'subscribe',
-      customerTelegram: isTelegram ? contact.trim() : '',
-      customerPhone:    isPhone    ? contact.trim() : '',
-    });
+    await Promise.all([
+      notifyTelegram({
+        type: 'subscribe',
+        customerTelegram: isTelegram ? contact.trim() : '',
+        customerPhone:    isPhone    ? contact.trim() : '',
+      }),
+      trackClick(getSessionId(), 'subscribe_service', 0, 'Product Subscribe'),
+    ]);
     setSending(false);
     setSent(true);
   }
@@ -627,6 +633,7 @@ export default function ProductPage() {
   const [showSub,     setShowSub]     = useState(false);
 
   useEffect(() => {
+    trackView(getSessionId(), '/Product', document.referrer);
     fetchProducts()
       .then(setProducts)
       .catch(() => setProducts(FALLBACK_PRODUCTS))
