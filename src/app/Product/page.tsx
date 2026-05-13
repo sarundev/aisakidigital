@@ -551,7 +551,7 @@ function ProductRow({ product, onOrder }: { product: ApiProduct; onOrder: (p: Ap
       </div>
 
       {/* ── Desktop ── */}
-      <div className="hidden sm:grid items-center gap-5 px-7 py-4 grid-cols-5">
+      <div className="hidden sm:grid  justify-center items-center gap-5 px-7 py-4 grid-cols-5">
         <div className="flex items-center gap-4 min-w-0">
           <div
             className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-200"
@@ -575,12 +575,12 @@ function ProductRow({ product, onOrder }: { product: ApiProduct; onOrder: (p: Ap
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#bbbbbb" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <span className="text-sm font-medium" style={{ color:'#555555' }}>{product.duration ?? product.category}</span>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col items-center justify-center gap-1">
           <span className="inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
             style={{ background: level.bg, color: level.color }}>
             <span className="relative flex h-1.5 w-1.5 shrink-0">
@@ -592,14 +592,14 @@ function ProductRow({ product, onOrder }: { product: ApiProduct; onOrder: (p: Ap
           {qty > 0 && <p className="pl-1 text-[10px]" style={{ color:'#bbb' }}>units available</p>}
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="text-right">
+        <div className="flex items-center justify-center gap-4">
+          <div className="text-center">
             <p className="text-xl font-black leading-none" style={{ color:'#1a7a05', letterSpacing:'-0.02em' }}>{product.price}</p>
             <p className="text-[10px] mt-0.5" style={{ color:'#aaa' }}>{priceUnit}</p>
           </div>
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center justify-center">
           <button
             onClick={() => onOrder(product)}
             className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-bold transition-all duration-150 hover:scale-105 active:scale-95"
@@ -685,7 +685,7 @@ export default function ProductPage() {
               <div className="hidden sm:grid items-center gap-5 px-7 py-3 grid-cols-5"
                 style={{ background:'linear-gradient(180deg,rgba(57,255,20,0.05),transparent)', borderBottom:'1px solid rgba(57,255,20,0.1)' }}>
                 {['PRODUCT TYPE','WARRANTY','IN STOCK','PRICE','ACTION'].map((label) => (
-                  <div key={label}>
+                  <div key={label} className="flex justify-center items-center">
                     <span className="text-[11px] font-extrabold tracking-widest" style={{ color:'#aaa', letterSpacing:'0.14em' }}>{label}</span>
                   </div>
                 ))}
