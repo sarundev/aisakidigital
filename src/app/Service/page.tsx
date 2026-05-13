@@ -23,7 +23,7 @@ interface Project {
   sort_order: number;
 }
 
-const TELEGRAM_URL = 'https://t.me/T1_fakerrr';
+const TELEGRAM_URL = 'https://t.me/aisakidigital';
 const FACEBOOK_URL = 'https://www.facebook.com/AisakiDigital';
 
 /* ─── Contact Modal ──────────────────────────────────────────────────────── */

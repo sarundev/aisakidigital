@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { fetchProducts, type ApiProduct } from '@/lib/api';
 import SupportBot from '@/components/SupportBot';
 
-const TELEGRAM_URL  = 'https://t.me/T1_fakerrr';
+const TELEGRAM_URL  = 'https://t.me/aisakidigital';
 const FACEBOOK_URL  = 'https://www.facebook.com/AisakiDigital';
 
 const FALLBACK_PRODUCTS: ApiProduct[] = [

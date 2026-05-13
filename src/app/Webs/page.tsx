@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import type { WebService } from '@/lib/services';
 
-const TELEGRAM_URL = 'https://t.me/T1_fakerrr';
+const TELEGRAM_URL = 'https://t.me/aisakidigital';
 const FACEBOOK_URL = 'https://www.facebook.com/AisakiDigital';
 
 /* ─── Static data ────────────────────────────────────────────────────────── */

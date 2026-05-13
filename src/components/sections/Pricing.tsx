@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import { fetchPricing, type ApiPricingPlan } from '@/lib/api';
 
-const TELEGRAM_URL = 'https://t.me/@T1_fakerrr';
+const TELEGRAM_URL = 'https://t.me/aisakidigital';
 const FACEBOOK_URL = 'https://www.facebook.com/AisakiDigital';
 
 function CheckIcon() {
