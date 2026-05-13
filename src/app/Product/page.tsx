@@ -58,7 +58,7 @@ function OrderModal({ product, onClose }: { product: ApiProduct; onClose: () => 
         customerTelegram: isTelegram ? contact.trim() : '',
         customerPhone:    isPhone    ? contact.trim() : '',
       }),
-      trackClick(getSessionId(), 'order_product', product.id, product.name),
+      trackClick(getSessionId(), 'order_product', product.id, product.name, parseFloat(product.price?.replace(/[^0-9.]/g, '') ?? '0') || undefined),
     ]);
     setSending(false);
     setSent(true);

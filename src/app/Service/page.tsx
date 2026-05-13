@@ -57,7 +57,7 @@ function ContactModal({ product, onClose }: { product: Project; onClose: () => v
         customerTelegram: isTelegram ? contact.trim() : '',
         customerPhone:    isPhone    ? contact.trim() : '',
       }),
-      trackClick(getSessionId(), 'subscribe_service', product.id, product.project_name),
+      trackClick(getSessionId(), 'subscribe_service', product.id, product.project_name, parseFloat(product.project_price?.replace(/[^0-9.]/g, '') ?? '0') || undefined),
     ]);
     setSending(false);
     setSent(true);

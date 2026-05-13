@@ -143,11 +143,12 @@ export async function trackClick(
   eventType: 'order_product' | 'subscribe_service',
   itemId: number,
   itemName: string,
+  price?: number,
 ): Promise<void> {
   await fetch('/api/v1/track/click', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ session_id: sessionId, event_type: eventType, item_id: itemId, item_name: itemName }),
+    body: JSON.stringify({ session_id: sessionId, event_type: eventType, item_id: itemId, item_name: itemName, price: price ?? null }),
   }).catch(() => {});
 }
 
