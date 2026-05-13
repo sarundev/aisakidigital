@@ -124,8 +124,6 @@ function ContactModal({ product, onClose }: { product: Project; onClose: () => v
                   )}
                 </div>
               )}
-
-
               {/* Contact input */}
               <div className="mb-5">
                 <label className="mb-2 block text-xs font-semibold" style={{ color: '#555' }}>
