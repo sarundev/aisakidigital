@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SupportBot from '@/components/SupportBot';
-import { trackView, trackClick, getSessionId } from '@/lib/api';
+import { trackClick, getSessionId } from '@/lib/api';
 
 async function notifyTelegram(payload: Record<string, string>) {
   await fetch('/api/telegram', {
@@ -459,10 +459,6 @@ function ProductCard({ product, index }: { product: Project; index: number }) {
 export default function ServicePage() {
   const [products, setProducts] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    trackView(getSessionId(), '/Service', document.referrer);
-  }, []);
 
   useEffect(() => {
     const base = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8001/api/v1';

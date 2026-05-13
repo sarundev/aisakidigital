@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { fetchProducts, trackView, trackClick, getSessionId, type ApiProduct } from '@/lib/api';
+import { fetchProducts, trackClick, getSessionId, type ApiProduct } from '@/lib/api';
 import SupportBot from '@/components/SupportBot';
 
 const TELEGRAM_URL  = 'https://t.me/aisakidigital';
@@ -633,7 +633,6 @@ export default function ProductPage() {
   const [showSub,     setShowSub]     = useState(false);
 
   useEffect(() => {
-    trackView(getSessionId(), '/Product', document.referrer);
     fetchProducts()
       .then(setProducts)
       .catch(() => setProducts(FALLBACK_PRODUCTS))

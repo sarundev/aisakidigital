@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Noto_Sans_Khmer } from "next/font/google";
 import "./globals.css";
 import "aos/dist/aos.css";
 import AOSProvider from "@/components/AOSProvider";
+import PageTracker from "@/components/PageTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${notoSansKhmer.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning={true}>
+        <PageTracker />
         <AOSProvider>{children}</AOSProvider>
       </body>
     </html>

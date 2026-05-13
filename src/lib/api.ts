@@ -131,7 +131,7 @@ export function getSessionId(): string {
 }
 
 export async function trackView(sessionId: string, page: string, referrer?: string): Promise<void> {
-  await fetch(`${BASE}/track/view`, {
+  await fetch('/api/v1/track/view', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ session_id: sessionId, page, referrer: referrer ?? '' }),
@@ -144,7 +144,7 @@ export async function trackClick(
   itemId: number,
   itemName: string,
 ): Promise<void> {
-  await fetch(`${BASE}/track/click`, {
+  await fetch('/api/v1/track/click', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ session_id: sessionId, event_type: eventType, item_id: itemId, item_name: itemName }),
