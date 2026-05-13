@@ -22,7 +22,8 @@ export default function Ourteam() {
   const [lightbox, setLightbox] = useState<MediaItem | null>(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/v1/media')
+    const base = process.env.NEXT_PUBLIC_API_URL ?? 'https://aisakiadmin.com/api/v1';
+    fetch(`${base}/media`)
       .then((r) => r.json())
       .then(setMembers)
       .catch(() => {});

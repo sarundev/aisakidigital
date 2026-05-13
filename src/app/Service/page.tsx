@@ -461,7 +461,7 @@ export default function ServicePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const base = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8001/api/v1';
+    const base = process.env.NEXT_PUBLIC_API_URL ?? 'https://aisakiadmin.com/api/v1';
     fetch(`${base}/projects`)
       .then((r) => { if (!r.ok) throw new Error(r.statusText); return r.json(); })
       .then(setProducts)
