@@ -75,10 +75,11 @@ function MarqueeRow({
        
       />
       <div
-        className="flex gap-3"
+        className="flex gap-3 justify-center"
         style={{
           animation: `${reverse ? 'marquee-reverse' : 'marquee'} ${speed}s linear infinite`,
           width: 'max-content',
+          minWidth: '100%',
         }}
       >
         {doubled.map((p, i) => (
@@ -182,7 +183,7 @@ export default function Parther() {
           </>
         ) : (
           <>
-            {rowOne.length > 0 && <MarqueeRow items={rowOne} speed={44} />}
+            {rowOne.length > 0 && <MarqueeRow items={rowOne} speed={43} />}
             {rowTwo.length > 0 && <MarqueeRow items={rowTwo} reverse speed={38} />}
           </>
         )}

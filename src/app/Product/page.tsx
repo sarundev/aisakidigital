@@ -492,7 +492,6 @@ function SkeletonRow() {
     </>
   );
 }
-
 /* ─── Category Icon ──────────────────────────────────────────────────────────── */
 
 function CategoryIcon({ category }: { category: string }) {
@@ -503,6 +502,7 @@ function CategoryIcon({ category }: { category: string }) {
   if (cat === 'telegram')  return <svg style={{ display:'flex', alignItems:'center', justifyContent:'center', padding:2, width:28, height:28, borderRadius:8, border:'1px solid rgba(36,161,222,0.5)', flexShrink:0 }} width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#24A1DE" /><path d="M17.5 6.5l-2.1 10.2c-.15.7-.56.87-1.13.54l-3.13-2.3-1.51 1.45c-.17.17-.31.31-.63.31l.22-3.17 5.74-5.19c.25-.22-.05-.34-.39-.12L6.1 13.5 3.1 12.57c-.67-.21-.68-.67.14-.99l13.25-5.11c.56-.2 1.05.14.87.99z" fill="white" /></svg>;
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>;
 }
+
 
 /* ─── Stock level ────────────────────────────────────────────────────────────── */
 
