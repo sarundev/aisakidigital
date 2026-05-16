@@ -110,6 +110,18 @@ export interface ApiActivity {
   sort_order: number;
 }
 
+export interface ApiTeamMember {
+  id: number;
+  name: string;
+  name_kh: string | null;
+  role: string;
+  role_kh: string | null;
+  photo: string | null;
+  color: string | null;
+  department: string | null;
+  sort_order: number;
+}
+
 export const fetchServices    = () => get<ApiService[]>('/services');
 export const fetchPricing     = () => get<ApiPricingPlan[]>('/pricing');
 export const fetchPortfolio   = () => get<ApiPortfolioItem[]>('/portfolio');
@@ -117,6 +129,7 @@ export const fetchPartners    = () => get<ApiPartner[]>('/partners');
 export const fetchProducts    = () => get<ApiProduct[]>('/products');
 export const fetchProjects    = () => get<ApiProject[]>('/projects');
 export const fetchActivities  = () => get<ApiActivity[]>('/activities');
+export const fetchTeamMembers = () => get<ApiTeamMember[]>('/team');
 
 // ─── Tracking ─────────────────────────────────────────────────────────────────
 

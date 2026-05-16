@@ -28,7 +28,7 @@ export default function Ourteam() {
       .then(setMembers)
       .catch(() => {});
   }, []);
-
+``
   useEffect(() => {
     const els = sectionRef.current?.querySelectorAll('.reveal');
     if (!els) return;

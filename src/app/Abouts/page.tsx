@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
+import { fetchTeamMembers, STORAGE, type ApiTeamMember } from '@/lib/api';
 
 const BRAND = {
   primary: '#39FF14',
@@ -62,14 +63,6 @@ const values = [
   },
 ];
 
-const team = [
-  { name: 'T1 Faker', role: 'Founder & Lead Developer', initial: '', color: 'rgba(57,255,20,0.15)' },
-  { name: 'Godd', role: 'Senior Developer', initial: '/image/godd.png', color: 'rgba(57,255,20,0.1)' },
-  { name: 'Sokha', role: 'UI/UX Designer', initial: '', color: 'rgba(57,255,20,0.1)' },
-  { name: 'Rithy', role: 'Marketing Lead', initial: '', color: 'rgba(57,255,20,0.1)' },
-  { name: 'Dara', role: 'Project Manager', initial: '', color: 'rgba(57,255,20,0.1)' },
-  { name: 'Vira', role: 'Backend Developer', initial: '', color: 'rgba(57,255,20,0.1)' },
-];
 function StatCard({ stat, index }: { stat: typeof stats[0]; index: number }) {
   return (
     <div
@@ -120,8 +113,9 @@ function ValueCard({ value, index }: { value: typeof values[0]; index: number })
   );
 }
 
-function TeamCard({ member, index }: { member: typeof team[0]; index: number }) {
+function TeamCard({ member, index }: { member: ApiTeamMember; index: number }) {
   const [hovered, setHovered] = useState(false);
+  const photoSrc = member.photo ? `${STORAGE}/storage/${member.photo}` : null;
   return (
     <div
       className="group text-center p-6 rounded-2xl transition-all duration-300 hover:-translate-y-2"
@@ -135,20 +129,20 @@ function TeamCard({ member, index }: { member: typeof team[0]; index: number }) 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="w-24 h-24 rounded-full mx-auto mb-5 overflow-hidden relative" style={{ 
-        background: member.color || 'rgba(57,255,20,0.1)', 
-        border: '2px solid rgba(57,255,20,0.2)' 
+      <div className="w-24 h-24 rounded-full mx-auto mb-5 overflow-hidden relative" style={{
+        background: member.color || 'rgba(57,255,20,0.1)',
+        border: '2px solid rgba(57,255,20,0.2)'
       }}>
-        {member.initial && member.initial.startsWith('/') ? (
+        {photoSrc ? (
           <Image
-            src={member.initial}
+            src={photoSrc}
             alt={member.name}
             fill
             className="object-cover"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-2xl font-bold" style={{ color: BRAND.primary }}>
-            {member.name.split(' ').map(n => n[0]).join('')}
+            {member.name.split(' ').map((n: string) => n[0]).join('')}
           </div>
         )}
       </div>
@@ -159,6 +153,12 @@ function TeamCard({ member, index }: { member: typeof team[0]; index: number }) 
 }
 
 export default function AboutsPage() {
+  const [team, setTeam] = useState<ApiTeamMember[]>([]);
+
+  useEffect(() => {
+    fetchTeamMembers().then(setTeam).catch(() => {});
+  }, []);
+
   return (
     <>
       <style>{`
