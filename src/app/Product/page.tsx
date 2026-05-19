@@ -656,7 +656,7 @@ export default function ProductPage() {
               className="font-black text-center text-[23px] sm:text-[22px] md:text-[32px] mt-4 md:text-4xl"
               style={{ fontFamily:'var(--font-khmer), sans-serif', color:'#111' }}
             >
-              តារាតម្លៃ Social Media{' '}
+              តារាងតម្លៃ Social Media{' '}
               <span style={{ background:'linear-gradient(135deg,#1a7a05,#39FF14)', backgroundClip:'text', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
                 ល្អៗ Build ថ្មីៗ
               </span>
