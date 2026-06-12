@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-const LAUNCH_DATE = new Date('2026-06-07T00:00:00');
+const LAUNCH_DATE = new Date('2026-07-07T00:00:00');
 
 function useCountdown(target: Date) {
   const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
