@@ -22,7 +22,7 @@ const notoSansKhmer = Noto_Sans_Khmer({
 });
 
 export const metadata: Metadata = {
-  title: "AisakiDigital",
+  title: "Aisaki Digital | Professional Marketing & Advertising Agency",
   description: "AisakiDigital is a trusted digital marketing agency in Cambodia specializing in Facebook Ads, TikTok growth, and online business promotion.",
   openGraph: {
     title: 'Aisaki Digital | Professional Digital Services',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: 'Aisaki Digital',
     images: [
       {
-        url: 'https://www.aisakikh.com/image/cover.png',
+        url: 'https://www.aisakikh.com/image/og-cover.jpg',
         width: 1200,
         height: 630,
         alt: 'Aisaki Digital Home Page',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Aisaki Digital | Professional Digital Services',
     description: 'Trusted digital marketing agency in Cambodia specializing in Facebook Ads and TikTok growth.',
-    images: ['https://www.aisakikh.com/image/cover.png'],
+    images: ['https://www.aisakikh.com/image/og-cover.jpg'],
   },
 };
 
