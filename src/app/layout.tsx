@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Aisaki Digital | Professional Digital Services',
     description: 'Trusted digital marketing agency in Cambodia specializing in Facebook Ads and TikTok growth.',
-    images: ['https://www.aisakikh.com/image/og-cover.jpg'],
+    images: ['https://www.aisakikh.com/image/cover.jpg'],
   },
 };
 
