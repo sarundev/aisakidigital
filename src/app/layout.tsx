@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: 'Aisaki Digital',
     images: [
       {
-        url: 'https://www.aisakikh.com/image/homepage-preview.png',
+        url: 'https://www.aisakikh.com/image/cover.png',
         width: 1200,
         height: 630,
         alt: 'Aisaki Digital Home Page',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Aisaki Digital | Professional Digital Services',
     description: 'Trusted digital marketing agency in Cambodia specializing in Facebook Ads and TikTok growth.',
-    images: ['https://www.aisakikh.com/image/homepage-preview.png'],
+    images: ['https://www.aisakikh.com/image/cover.png'],
   },
 };
 
