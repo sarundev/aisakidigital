@@ -23,7 +23,29 @@ const notoSansKhmer = Noto_Sans_Khmer({
 
 export const metadata: Metadata = {
   title: "AisakiDigital",
-  description: "Professional Digital Services",
+  description: "AisakiDigital is a trusted digital marketing agency in Cambodia specializing in Facebook Ads, TikTok growth, and online business promotion.",
+  openGraph: {
+    title: 'Aisaki Digital | Professional Digital Services',
+    description: 'Trusted digital marketing agency in Cambodia. We specialize in Facebook Ads, TikTok growth, and online business promotion.',
+    url: 'https://www.aisakikh.com',
+    siteName: 'Aisaki Digital',
+    images: [
+      {
+        url: 'https://www.aisakikh.com/image/homepage-preview.png',
+        width: 1200,
+        height: 630,
+        alt: 'Aisaki Digital Home Page',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Aisaki Digital | Professional Digital Services',
+    description: 'Trusted digital marketing agency in Cambodia specializing in Facebook Ads and TikTok growth.',
+    images: ['https://www.aisakikh.com/image/homepage-preview.png'],
+  },
 };
 
 export default function RootLayout({
