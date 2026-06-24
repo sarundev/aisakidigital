@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: 'Aisaki Digital',
     images: [
       {
-        url: 'https://www.aisakikh.com/image/og-cover.jpg',
+        url: 'https://www.aisakikh.com/image/cover.jpg',
         width: 1200,
         height: 630,
         alt: 'Aisaki Digital Home Page',
